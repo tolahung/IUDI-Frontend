@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../Modal/Modal";
 
@@ -7,15 +7,34 @@ function LoginForm() {
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [loginData, setLoginData] = useState({
-    fullName: "",
-    password: "",
-    rememberPassword: false,
+    Username: "",
+    Password: "",
+    Latitude: "",
+    Longitude: "",
   });
 
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setLoginData({
+          ...loginData,
+          Latitude: latitude,
+          Longitude: longitude,
+        });
+      });
+    } else {
+      console.log("Trình duyệt không hỗ trợ geolocation.");
+    }
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
   const handleLoginChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const newValue = type === "checkbox" ? checked : value;
-    setLoginData({ ...loginData, [name]: newValue });
+    const { name, value } = e.target;
+    setLoginData({ ...loginData, [name]: value });
   };
 
   const handleLogin = async (e) => {
@@ -23,20 +42,25 @@ function LoginForm() {
     e.preventDefault();
     try {
       const response = await axios.post("https://api.iudi.xyz/login", {
-        fullName: loginData.fullName,
-        password: loginData.password,
+        Username: loginData.Username,
+        Email: loginData.Email,
+        Password: loginData.Password,
+        Latitude: loginData.Latitude,
+        Longitude: loginData.Longitude,
       });
       setMessage("Login Success");
+      setIsSuccess(true);
       console.log("Phản hồi từ API:", response.data);
     } catch (error) {
       setIsSuccess(false);
-      setMessage("Password or name is incorrect");
+      setMessage("Password or Username is incorrect");
     }
   };
 
   const closeModal = () => {
     setShowModal(false);
   };
+
   return (
     <>
       <div className="flex items-center justify-center h-screen">
@@ -48,17 +72,17 @@ function LoginForm() {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="fullName"
+                htmlFor="Username"
               >
-                Họ Tên
+                Username
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="fullName"
+                id="Username"
                 type="text"
-                placeholder="Họ Tên"
-                name="fullName"
-                value={loginData.fullName}
+                placeholder="Username"
+                name="Username"
+                value={loginData.Username}
                 onChange={handleLoginChange}
                 required
               />
@@ -66,46 +90,34 @@ function LoginForm() {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="password"
+                htmlFor="Password"
               >
-                Mật Khẩu
+                Password
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="password"
+                id="Password"
                 type="password"
-                placeholder="Mật Khẩu"
-                name="password"
-                value={loginData.password}
+                placeholder="Password"
+                name="Password"
+                value={loginData.Password}
                 onChange={handleLoginChange}
                 required
               />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                <input
-                  type="checkbox"
-                  name="rememberPassword"
-                  checked={loginData.rememberPassword}
-                  onChange={handleLoginChange}
-                  className="mr-2 leading-tight"
-                />
-                <span className="text-sm">Ghi nhớ mật khẩu</span>
-              </label>
             </div>
             <div className="mb-4">
               <button
                 className="w-full py-2 px-4 rounded bg-blue-500 hover:bg-blue-700 text-white focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Đăng nhập
+                Login
               </button>
             </div>
           </form>
           <p className="text-center text-gray-700 text-sm">
-            Nếu chưa có tài khoản?{" "}
+            Don't have an account ?{" "}
             <a href="/register" className="text-blue-500">
-              Đăng ký
+              Register
             </a>
           </p>
         </div>

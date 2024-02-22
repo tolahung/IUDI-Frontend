@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../Modal/Modal";
 
@@ -7,34 +7,63 @@ const RegisterForm = () => {
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    agreeTerms: false,
+    Username: "",
+    FullName: "",
+    Email: "",
+    Password: "",
+    Latitude: "",
+    Longitude: "",
   });
 
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setFormData({
+          ...formData,
+          Latitude: latitude,
+          Longitude: longitude,
+        });
+      });
+    } else {
+      console.log("Trình duyệt không hỗ trợ geolocation.");
+    }
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
   const handleChange = (e) => {
-    const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
-    setFormData({ ...formData, [e.target.name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.agreeTerms) {
-      alert("You must agree to the terms and conditions");
-      return;
-    }
     try {
       const response = await axios.post(
         "https://api.iudi.xyz/register",
         formData
       );
-      console.log(response.data);
 
-      response.data.Status != 200 ? setIsSuccess(false) : setIsSuccess(true);
+      if (response.data.status === 200) {
+        setFormData({
+          Username: "",
+          FullName: "",
+          Email: "",
+          Password: "",
+          Latitude: "",
+          Longitude: "",
+        });
+      }
+
       setShowModal(true);
-      setMessage(response.data.message);
+      setIsSuccess(response.data.status === 200);
+      setMessage(
+        response.data.status === 200
+          ? "Register Success"
+          : response.data.message
+      );
     } catch (error) {
       console.error("Error registering:", error);
     }
@@ -55,17 +84,35 @@ const RegisterForm = () => {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="username"
+              >
+                Username
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username"
+                type="text"
+                placeholder="Username"
+                name="Username"
+                value={formData.Username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="fullName"
               >
-                Họ Tên
+                Full Name
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="fullName"
                 type="text"
                 placeholder="Full Name"
-                name="fullName"
-                value={formData.fullName}
+                name="FullName"
+                value={formData.FullName}
                 onChange={handleChange}
                 required
               />
@@ -82,8 +129,8 @@ const RegisterForm = () => {
                 id="email"
                 type="email"
                 placeholder="Email"
-                name="email"
-                value={formData.email}
+                name="Email"
+                value={formData.Email}
                 onChange={handleChange}
                 required
               />
@@ -93,49 +140,32 @@ const RegisterForm = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="password"
               >
-                Mật Khẩu
+                Password
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
                 placeholder="Password"
-                name="password"
-                value={formData.password}
+                name="Password"
+                value={formData.Password}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                <input
-                  type="checkbox"
-                  name="agreeTerms"
-                  checked={formData.agreeTerms}
-                  onChange={handleChange}
-                  className="mr-2 leading-tight"
-                />
-                <span className="text-sm">Đồng ý điền khoản và điều kiện</span>
-              </label>
-            </div>
-            <div className="mb-4">
               <button
-                className={`w-full py-2 px-4 rounded focus:outline-none ${
-                  formData.agreeTerms
-                    ? "bg-blue-500 hover:bg-blue-700 text-white"
-                    : "bg-gray-400 cursor-not-allowed"
-                }`}
+                className="w-full py-2 px-4 rounded focus:outline-none bg-blue-500 hover:bg-blue-700 text-white"
                 type="submit"
-                disabled={!formData.agreeTerms}
               >
-                Đăng Kí
+                Register
               </button>
             </div>
           </form>
           <p className="text-center text-gray-700 text-sm">
-            Nếu đã có tài khoản?{" "}
+            Already have an account?{" "}
             <a href="/login" className="text-blue-500">
-              Đăng nhập
+              Log in
             </a>
           </p>
         </div>
