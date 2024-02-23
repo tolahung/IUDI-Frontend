@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../Modal/Modal";
+import Header from "../Header/Header";
 
 function LoginForm() {
   const [showModal, setShowModal] = useState(false);
@@ -50,7 +51,12 @@ function LoginForm() {
       });
       setMessage("Login Success");
       setIsSuccess(true);
-      console.log("Phản hồi từ API:", response.data);
+      console.log("Phản hồi từ API:", response?.data);
+      localStorage.setItem("IuDiToken", response?.data?.jwt);
+      localStorage.setItem(
+        "UserNameIuDi",
+        response?.data.user.Users[0].Username
+      );
     } catch (error) {
       setIsSuccess(false);
       setMessage("Password or Username is incorrect");
@@ -59,11 +65,23 @@ function LoginForm() {
 
   const closeModal = () => {
     setShowModal(false);
+    if (isSuccess) {
+      window.location.href = "/";
+    }
   };
 
   return (
     <>
-      <div className="flex items-center justify-center h-screen">
+      <Header />
+      <h3
+        className="text-3xl font-extrabold text-gray-900 text-center mb-6 mt-10"
+        style={{
+          color: "rgba(44,186,55,0.8127626050420168)",
+        }}
+      >
+        LOGIN
+      </h3>
+      <div className="flex items-center justify-center mt-10">
         <div className="max-w-md w-full mx-auto">
           <form
             onSubmit={handleLogin}
@@ -107,7 +125,10 @@ function LoginForm() {
             </div>
             <div className="mb-4">
               <button
-                className="w-full py-2 px-4 rounded bg-blue-500 hover:bg-blue-700 text-white focus:outline-none focus:shadow-outline"
+                style={{
+                  background: "rgba(44,186,55,0.8127626050420168)",
+                }}
+                className="w-full py-2 px-4 rounded text-white focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Login
@@ -116,7 +137,13 @@ function LoginForm() {
           </form>
           <p className="text-center text-gray-700 text-sm">
             Don't have an account ?{" "}
-            <a href="/register" className="text-blue-500">
+            <a
+              href="/register"
+              className="text-500"
+              style={{
+                color: "rgba(44,186,55,0.8127626050420168)",
+              }}
+            >
               Register
             </a>
           </p>
