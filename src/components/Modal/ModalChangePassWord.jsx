@@ -21,13 +21,14 @@ const ModalChangePassWord = ({ userId, isOpen, onClose }) => {
           NewPassword: newPassword,
         }
       );
-      console.log(response.data);
-      response.status == 200
-        ? (setMessage("Change Password Success"),
+      if (response.status == 200) {
+        setMessage("Change Password Success"),
           setCurrentPassword(""),
           setNewPassword(""),
-          setConfirmPassword(""))
-        : setMessage("Change Password Failed");
+          setConfirmPassword("");
+      } else {
+        setMessage("Change Password Failed");
+      }
     } catch (error) {}
   };
 
