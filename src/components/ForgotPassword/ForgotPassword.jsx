@@ -14,7 +14,7 @@ function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://api.iudi.xyz/forgotPassword", {
+      const response = await axios.post("https://api.iudi.xyz/api/forgotPassword", {
         Email: email,
       });
       setShowModal(true);
@@ -41,10 +41,16 @@ function ForgotPassword() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        background:
+          "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
-      <div className="mt-10 flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full bg-white p-8 rounded-md shadow-lg">
+      <div className="mt-10 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full p-8 bg-white rounded-md shadow-lg mt-10">
           <h3
             className="text-3xl font-extrabold text-gray-900 text-center mb-6"
             style={{
@@ -89,6 +95,7 @@ function ForgotPassword() {
           </form>
         </div>
       </div>
+
       {showModal && (
         <Modal
           isSuccess={isSuccess}
@@ -97,7 +104,8 @@ function ForgotPassword() {
           onClose={closeModal}
         />
       )}
-    </>
+      <Footer />
+    </div>
   );
 }
 

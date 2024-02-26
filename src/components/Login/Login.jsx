@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../Modal/Modal";
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function LoginForm() {
   const [showModal, setShowModal] = useState(false);
@@ -42,7 +43,7 @@ function LoginForm() {
     setShowModal(true);
     e.preventDefault();
     try {
-      const response = await axios.post("https://api.iudi.xyz/login", {
+      const response = await axios.post("https://api.iudi.xyz/api/login", {
         Username: loginData.Username,
         Email: loginData.Email,
         Password: loginData.Password,
@@ -71,26 +72,36 @@ function LoginForm() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        background:
+          "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
-      <h3
-        className="text-3xl font-extrabold text-gray-900 text-center mb-6 mt-10"
-        style={{
-          color: "rgba(44,186,55,0.8127626050420168)",
-        }}
-      >
-        LOGIN
-      </h3>
-      <div className="flex items-center justify-center mt-10">
+
+      <div className="flex items-center justify-center mt-20">
         <div className="max-w-md w-full mx-auto">
           <form
             onSubmit={handleLogin}
             className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           >
+            <h3
+              style={{
+                color: "rgba(44,186,55,0.8127626050420168)",
+              }}
+              className="text-white text-3xl font-extrabold text-center mb-2 mt-2"
+            >
+              LOGIN
+            </h3>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="Username"
+                style={{
+                  color: "rgba(44,186,55,0.8127626050420168)",
+                }}
               >
                 Username
               </label>
@@ -109,6 +120,9 @@ function LoginForm() {
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="Password"
+                style={{
+                  color: "rgba(44,186,55,0.8127626050420168)",
+                }}
               >
                 Password
               </label>
@@ -128,27 +142,27 @@ function LoginForm() {
                 style={{
                   background: "rgba(44,186,55,0.8127626050420168)",
                 }}
-                className="w-full py-2 px-4 rounded text-white focus:outline-none focus:shadow-outline"
+                className="w-full py-2 px-4 font-bold rounded text-white focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Login
               </button>
             </div>
-          </form>
-          <p className="text-center text-gray-700 text-sm">
-            Don't have an account ?{" "}
-            <a
-              href="/register"
-              className="text-500"
+            <p
+              className="text-white text-center  text-sm"
               style={{
                 color: "rgba(44,186,55,0.8127626050420168)",
               }}
             >
-              Register
-            </a>
-          </p>
+              Don't have an account ?{" "}
+              <a href="/register" className="text-500">
+                <strong>REGISTER</strong>
+              </a>
+            </p>
+          </form>
         </div>
       </div>
+      <Footer />
       {showModal && (
         <Modal
           isSuccess={isSuccess}
@@ -157,7 +171,7 @@ function LoginForm() {
           onClose={closeModal}
         />
       )}
-    </>
+    </div>
   );
 }
 

@@ -44,7 +44,7 @@ const RegisterForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://api.iudi.xyz/register",
+        "https://api.iudi.xyz/api/register",
         formData
       );
 
@@ -76,25 +76,34 @@ const RegisterForm = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        background:
+          "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
-      <h3
-        className="text-3xl font-extrabold text-gray-900 text-center mb-6 mt-10"
-        style={{
-          color: "rgba(44,186,55,0.8127626050420168)",
-        }}
-      >
-        REGISTER
-      </h3>
-      <div className="max-w-md w-full mx-auto">
+      <div className="max-w-md w-full mx-auto mt-10">
         <form
           onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="bg-white shadow-md rounded px-8 pt-3 pb-5 mb-2"
         >
+          <h3
+            className="text-3xl font-extrabold text-center mb-2 mt-2 "
+            style={{
+              color: "rgba(44,186,55,0.8127626050420168)",
+            }}
+          >
+            REGISTER
+          </h3>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="username"
+              style={{
+                color: "rgba(44,186,55,0.8127626050420168)",
+              }}
             >
               Username
             </label>
@@ -113,6 +122,9 @@ const RegisterForm = () => {
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="fullName"
+              style={{
+                color: "rgba(44,186,55,0.8127626050420168)",
+              }}
             >
               Full Name
             </label>
@@ -131,6 +143,9 @@ const RegisterForm = () => {
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="email"
+              style={{
+                color: "rgba(44,186,55,0.8127626050420168)",
+              }}
             >
               Email
             </label>
@@ -149,6 +164,9 @@ const RegisterForm = () => {
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="password"
+              style={{
+                color: "rgba(44,186,55,0.8127626050420168)",
+              }}
             >
               Password
             </label>
@@ -169,28 +187,27 @@ const RegisterForm = () => {
                 background:
                   "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
               }}
-              className="w-full py-2 px-4 rounded focus:outline-none text-white"
+              className="w-full py-2 px-4 font-bold rounded focus:outline-none text-white"
               type="submit"
             >
               Register
             </button>
           </div>
-        </form>
-        <p className="text-center text-gray-700 text-sm">
-          Already have an account?{" "}
-          <a
-            href="/login"
-            className="text-500"
+          <p
+            className="text-center text-sm"
             style={{
               color: "rgba(44,186,55,0.8127626050420168)",
             }}
           >
-            Log in
-          </a>
-        </p>
+            Already have an account ?{" "}
+            <a href="/login" className="text-500">
+              <strong>LOG IN</strong>
+            </a>
+          </p>
+        </form>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
 
       {showModal && (
         <Modal

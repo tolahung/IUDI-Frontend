@@ -74,17 +74,12 @@ const Header = () => {
 
   return (
     <>
-      <Navbar
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
-        }}
-      >
+      <div className="text-white border-b border-lightgray">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
             href="/"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
+            className="mr-4 cursor-pointer py-1.5 px-3 font-medium"
           >
             <img src={Logo} alt="Example" />
           </Typography>
@@ -196,7 +191,7 @@ const Header = () => {
             </Button>
           </div>
         </MobileNav>
-      </Navbar>
+      </div>
     </>
   );
 };
