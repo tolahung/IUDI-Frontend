@@ -41,7 +41,6 @@ function Profile() {
   const closeModal = () => {
     setIsModalOpenChangePass(false);
   };
-
   return (
     <>
       {!isLogin ? (
@@ -74,7 +73,7 @@ function Profile() {
             Change Password
           </button>
           <ModalChangePassWord
-            userId={8}
+            userId={profileData?.Users[0].UserID}
             isOpen={isModalOpenChangePass}
             onClose={closeModal}
           />
