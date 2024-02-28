@@ -13,25 +13,25 @@ function LoginForm() {
     Password: "",
     Latitude: "",
     Longitude: "",
+    LastLoginIP: "",
   });
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://ip-api.com/json/");
         setLoginData({
           ...loginData,
-          Latitude: latitude,
-          Longitude: longitude,
+          Latitude: response.data.lat,
+          Longitude: response.data.lon,
+          LastLoginIP: response.data.query,
         });
-      });
-    } else {
-      console.log("Trình duyệt không hỗ trợ geolocation.");
-    }
-  };
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  useEffect(() => {
-    getLocation();
+    fetchData();
   }, []);
 
   const handleLoginChange = (e) => {
@@ -49,6 +49,7 @@ function LoginForm() {
         Password: loginData.Password,
         Latitude: loginData.Latitude,
         Longitude: loginData.Longitude,
+        LastLoginIP: loginData.LastLoginIP,
       });
       setMessage("Login Success");
       setIsSuccess(true);
