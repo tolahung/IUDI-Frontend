@@ -7,11 +7,13 @@ import background from "../../images/background.jpg";
 function Home() {
   const backgroundImageStyle = {
     backgroundImage: `url(${background})`,
-    // backgroundSize: 'cover',
+    backgroundSize: 'cover',
     // backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     minHeight: "100vh"
   };
+
+  
   return (
     <>
       <div

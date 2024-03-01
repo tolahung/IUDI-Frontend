@@ -84,7 +84,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="text-white border-b border-lightgray">
+      <div className="text-white">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
