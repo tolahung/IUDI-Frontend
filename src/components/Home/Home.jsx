@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import LayoutHome from "./Layout";
 import background from "../../images/background.jpg";
+import Logo from "../../images/logoApp.png";
 
 function Home() {
   const backgroundImageStyle = {
@@ -10,20 +11,16 @@ function Home() {
     backgroundSize: 'cover',
     // backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    minHeight: "100vh"
+    minHeight: '100vh',
   };
 
   
   return (
-    <>
-      <div
-        style={backgroundImageStyle}
-      >
+      <div style={backgroundImageStyle}>
         <Header />
         <LayoutHome/>
         <Footer />
       </div>
-    </>
   );
 }
 

@@ -3,6 +3,7 @@ import axios from "axios";
 import Modal from "../Modal/Modal";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import background from "../../images/background.jpg";
 
 function LoginForm() {
   const [showModal, setShowModal] = useState(false);
@@ -15,6 +16,14 @@ function LoginForm() {
     Longitude: "",
     LastLoginIP: "",
   });
+
+  const backgroundImageStyle = {
+    backgroundImage: `url(${background})`,
+    backgroundSize: 'cover',
+    // backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    minHeight: '100vh',
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,12 +82,9 @@ function LoginForm() {
   };
 
   return (
+
     <div
-      style={{
-        background:
-          "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
-        minHeight: "100vh",
-      }}
+      style={backgroundImageStyle}
     >
       <Header />
 
@@ -86,7 +92,7 @@ function LoginForm() {
         <div className="max-w-md w-full mx-auto">
           <form
             onSubmit={handleLogin}
-            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            className="bg-zinc-900 shadow-md rounded px-8 pt-6 pb-8 mb-4"
           >
             <h3
               style={{
