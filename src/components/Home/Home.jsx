@@ -1,18 +1,24 @@
 import React from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import LayoutHome from "./Layout";
+import background from "../../images/background.jpg";
 
 function Home() {
+  const backgroundImageStyle = {
+    backgroundImage: `url(${background})`,
+    // backgroundSize: 'cover',
+    // backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    minHeight: "100vh"
+  };
   return (
     <>
       <div
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
-          minHeight: "100vh",
-        }}
+        style={backgroundImageStyle}
       >
         <Header />
+        <LayoutHome/>
         <Footer />
       </div>
     </>
