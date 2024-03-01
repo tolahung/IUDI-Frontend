@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import LayoutHome from "./Layout";
 import background from "../../images/background.jpg";
-import Logo from "../../images/logoApp.png";
+
 
 function Home() {
   const backgroundImageStyle = {
