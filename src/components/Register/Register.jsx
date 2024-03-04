@@ -1,26 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Modal from "../Modal/Modal";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import background from "../../images/background.jpg";
-
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import registerSchema from "../../schemas/register";
+import { joiResolver } from "@hookform/resolvers/joi";
 const RegisterForm = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [message, setMessage] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [formData, setFormData] = useState({
-    Username: "",
-    FullName: "",
-    Email: "",
-    Password: "",
-    Latitude: "",
-    Longitude: "",
-    LastLoginIP : "1",
-    avatarLink: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9Zde21fi2AnY9_C17tqYi8DO25lRM_yAa7Q&usqp=CAU&fbclid=IwAR16g1ONptpUiKuDIt37LRxU3FTZck1cv9HDywe9VWxWSQBwcuGNfB7JUw4"
-  });
-
-
   const backgroundImageStyle = {
     backgroundImage: `url(${background})`,
     backgroundSize: 'cover',
@@ -28,64 +15,50 @@ const RegisterForm = () => {
     backgroundRepeat: 'no-repeat',
     minHeight: '100vh',
   };
-
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors, isValid },
+  } = useForm({ resolver: joiResolver(registerSchema)});
 
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
-        setFormData({
-          ...formData,
-          Latitude: latitude,
-          Longitude: longitude,
-        });
+        setValue(
+          'Latitude', latitude
+        );
+        setValue(
+          'Longitude', longitude
+        );
+        setValue(
+          'avatarLink','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9Zde21fi2AnY9_C17tqYi8DO25lRM_yAa7Q&usqp=CAU&fbclid=IwAR16g1ONptpUiKuDIt37LRxU3FTZck1cv9HDywe9VWxWSQBwcuGNfB7JUw4'
+        )
+        setValue('LastLoginIP','1')
       });
+      
     } else {
-      console.log("Trình duyệt không hỗ trợ geolocation.");
+      alert("Trình duyệt không hỗ trợ geolocation hoặc trình duyệt chặn truy cập vị trí, vui lòng kiểm tra!.");
     }
   };
-
   useEffect(() => {
     getLocation();
   }, []);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmitForm = async (data) => {
+    if(isValid){
     try {
       const response = await axios.post(
         "https://api.iudi.xyz/api/register",
-        formData
+        data
       );
-
-      if (response.data.status === 200) {
-        setFormData({
-          Username: "",
-          FullName: "",
-          Email: "",
-          Password: "", 
-          Latitude: "",
-          Longitude: "",
-        });
-      }
-
-      setShowModal(true);
-      setIsSuccess(response.data.status === 200);
-      setMessage(
-        response.data.status === 200
-          ? "Register Success"
-          : response.data.message
-      );
+      (response.data.status === 200) && toast.success("Register successfully!") && reset();
     } catch (error) {
       console.error("Error registering:", error);
+      toast.error(`Register failed! ${error.response.data.message}`, {closeOnClick:true});
     }
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
+  }
   };
 
   return (
@@ -103,7 +76,7 @@ const RegisterForm = () => {
       <Header />
       <div className="max-w-md w-full mx-auto mt-10">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(handleSubmitForm)}
           className="bg-zinc-900 shadow-md rounded px-8 pt-3 pb-5 mb-2"
         >
           <h3
@@ -130,10 +103,11 @@ const RegisterForm = () => {
               type="text"
               placeholder="Username"
               name="Username"
-              value={formData.Username}
-              onChange={handleChange}
-              required
+              {...register("Username")}
             />
+            {errors.Username && (
+            <p className="text-red-500 text-sm font-bold mt-2"> {errors.Username.message} </p>
+            )}
           </div>
           <div className="mb-4">
             <label
@@ -151,10 +125,11 @@ const RegisterForm = () => {
               type="text"
               placeholder="Full Name"
               name="FullName"
-              value={formData.FullName}
-              onChange={handleChange}
-              required
+              {...register("FullName")}
             />
+            {errors.FullName && (
+            <p className="text-red-500 text-sm font-bold mt-2"> {errors.FullName.message} </p>
+            )}
           </div>
           <div className="mb-4">
             <label
@@ -172,29 +147,24 @@ const RegisterForm = () => {
               type="email"
               placeholder="Email"
               name="Email"
-              value={formData.Email}
-              onChange={handleChange}
-              required
+              {...register("Email")}
             />
-
+            {errors.Email && (
+            <p className="text-red-500 text-sm font-bold mt-2"> {errors.Email.message} </p>
+            )}
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
               id="avatarLink"
               type="text"
               name="avatarLink"
-              value={formData.avatarLink}
-              onChange={handleChange}
-              required
+              {...register("avatarLink")}
             />
-
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
               id="LastLoginIP"
               type="text"
               name="LastLoginIP"
-              value={formData.LastLoginIP}
-              onChange={handleChange}
-              required
+              {...register("LastLoginIP")}
             />
 
           </div>
@@ -214,10 +184,33 @@ const RegisterForm = () => {
               type="password"
               placeholder="Password"
               name="Password"
-              value={formData.Password}
-              onChange={handleChange}
-              required
+              {...register("Password")}
             />
+          </div>
+          {errors.Password && (
+            <p className="text-red-500 text-sm font-bold mt-2"> {errors.Password.message} </p>
+          )}
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+              style={{
+                color: "rgba(44,186,55,0.8127626050420168)",
+              }}
+            >
+              Confirm Password
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="cf_password"
+              type="password"
+              placeholder="Confirm Password"
+              name="Cf_Password"
+              {...register("Cf_Password")}
+            />
+            {errors.Cf_Password && (
+            <p className="text-red-500 text-sm font-bold mt-2"> {errors.Cf_Password.message} </p>
+            )}
           </div>
           <div className="mb-4">
             <button
@@ -246,15 +239,7 @@ const RegisterForm = () => {
       </div>
 
       <Footer />
-
-      {showModal && (
-        <Modal
-          isSuccess={isSuccess}
-          title="REGISTER"
-          message={message}
-          onClose={closeModal}
-        />
-      )}
+      
     </div>
   );
 };
