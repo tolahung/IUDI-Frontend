@@ -16,6 +16,8 @@ const RegisterForm = () => {
     Password: "",
     Latitude: "",
     Longitude: "",
+    LastLoginIP : "1",
+    avatarLink: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9Zde21fi2AnY9_C17tqYi8DO25lRM_yAa7Q&usqp=CAU&fbclid=IwAR16g1ONptpUiKuDIt37LRxU3FTZck1cv9HDywe9VWxWSQBwcuGNfB7JUw4"
   });
 
 
@@ -64,7 +66,7 @@ const RegisterForm = () => {
           Username: "",
           FullName: "",
           Email: "",
-          Password: "",
+          Password: "", 
           Latitude: "",
           Longitude: "",
         });
@@ -174,6 +176,27 @@ const RegisterForm = () => {
               onChange={handleChange}
               required
             />
+
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
+              id="avatarLink"
+              type="text"
+              name="avatarLink"
+              value={formData.avatarLink}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
+              id="LastLoginIP"
+              type="text"
+              name="LastLoginIP"
+              value={formData.LastLoginIP}
+              onChange={handleChange}
+              required
+            />
+
           </div>
           <div className="mb-4">
             <label
