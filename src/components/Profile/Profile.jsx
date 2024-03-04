@@ -96,7 +96,7 @@ function Profile() {
               </CardHeader>
               <CardBody className="text-center flex flex-col justify-center">
                 <Typography variant="h4" color="blue-gray" className="mb-2">
-                  Lê Hữu Kiên
+                {profileData?.Users[0].FullName}
                 </Typography>
                 <Typography
                   color="blue-gray"
