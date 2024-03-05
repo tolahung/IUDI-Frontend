@@ -20,6 +20,8 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import ModalMyGroups from "../Modal/ModalMyGroups";
+import background from "../../images/bg3.jpg"
+
 
 function Profile() {
   const [isLogin, setIsLogin] = useState(false);
@@ -35,6 +37,13 @@ function Profile() {
       setIsLogin(true);
     }
   }, []);
+
+  const background ={
+    backgroundImage : `url${background}`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    minHeight: '100vh',
+  }
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -74,11 +83,7 @@ function Profile() {
       ) : (
         //<div className="min-h-screen bg-gradient-to-b from-green-500 via-green-400 to-green-300">
         <div
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
-            minHeight: "100vh",
-          }}
+          style={background}
         >
           <Header />
 
