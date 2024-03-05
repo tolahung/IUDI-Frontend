@@ -20,7 +20,7 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import ModalMyGroups from "../Modal/ModalMyGroups";
-import background from "../../images/bg3.jpg"
+import bg from "../../images/bg3.jpg"
 
 
 function Profile() {
@@ -39,7 +39,7 @@ function Profile() {
   }, []);
 
   const background ={
-    backgroundImage : `url${background}`,
+    backgroundImage : `url(${bg})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     minHeight: '100vh',
@@ -82,9 +82,7 @@ function Profile() {
         <NotFound />
       ) : (
         //<div className="min-h-screen bg-gradient-to-b from-green-500 via-green-400 to-green-300">
-        <div
-          style={background}
-        >
+        <div style={background}>
           <Header />
 
           <div className="flex justify-center items-center mt-10">

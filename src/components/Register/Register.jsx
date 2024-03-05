@@ -7,7 +7,9 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import registerSchema from "../../schemas/register";
 import { joiResolver } from "@hookform/resolvers/joi";
+
 const RegisterForm = () => {
+
   const backgroundImageStyle = {
     backgroundImage: `url(${background})`,
     backgroundSize: 'cover',
@@ -15,6 +17,7 @@ const RegisterForm = () => {
     backgroundRepeat: 'no-repeat',
     minHeight: '100vh',
   };
+
   const {
     register,
     handleSubmit,
@@ -43,9 +46,11 @@ const RegisterForm = () => {
       alert("Trình duyệt không hỗ trợ geolocation hoặc trình duyệt chặn truy cập vị trí, vui lòng kiểm tra!.");
     }
   };
+
   useEffect(() => {
     getLocation();
   }, []);
+
   const handleSubmitForm = async (data) => {
     if(isValid){
     try {
@@ -61,6 +66,8 @@ const RegisterForm = () => {
   }
   };
 
+
+  
   return (
     <div
       style={
