@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from 'react-hook-form';
 import loginSchema from "../../schemas/login";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const backgroundImageStyle = {
@@ -21,30 +22,18 @@ function LoginForm() {
 
   const { register,
     handleSubmit,
+    reset,
+    setValue,
     formState: { errors, isValid },
   } = useForm({ resolver: joiResolver(loginSchema) })
-
-
-  // const [message, setMessage] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [loginData, setLoginData] = useState({
-    Username: "",
-    Password: "",
-    Latitude: "",
-    Longitude: "",
-    LastLoginIP: "",
-  });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://ip-api.com/json/");
-        setLoginData({
-          ...loginData,
-          Latitude: response.data.lat,
-          Longitude: response.data.lon,
-          LastLoginIP: response.data.query,
-        });
+        setValue('Latitude', response.data.lat)
+        setValue('Longitude', response.data.lon)
+        setValue('LastLoginIP', response.data.query)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -53,20 +42,12 @@ function LoginForm() {
     fetchData();
   }, []);
 
-
-  const handleLogin = async (e) => {
-    // e.preventDefault();
+  const navigate = useNavigate()
+  const handleLogin = async (data) => {
+    if(isValid){
     try {
-      const response = await axios.post("https://api.iudi.xyz/api/login", {
-        Username: loginData.Username,
-        Email: loginData.Email,
-        Password: loginData.Password,
-        Latitude: loginData.Latitude,
-        Longitude: loginData.Longitude,
-        LastLoginIP: loginData.LastLoginIP,
-      });
+      const response = await axios.post("https://api.iudi.xyz/api/login", data);
 
-      setIsSuccess(true);
       console.log("Phản hồi từ API:", response?.data);
       localStorage.setItem("IuDiToken", response?.data?.jwt);
       localStorage.setItem(
@@ -74,7 +55,7 @@ function LoginForm() {
         response?.data.user.Users[0].Username
       );
 
-      toast.success('🦄 Wow so easy!', {
+      toast.success('Login successfully!', {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -84,18 +65,14 @@ function LoginForm() {
         progress: 1,
         theme: "light",
         });
-
-        window.location.href = "/";
-
+        setTimeout(navigate('/',5000))
     } catch (error) {
-      // setIsSuccess(false);
-      // setMessage("Password or Username is incorrect");
       console.error("Error registering:", error);
       toast.error(`Register failed! ${error.response.data.message}`, { closeOnClick: true });
     }
+  }
+    else toast.warning("An error occur...")
   };
-
-
 
   return (
 

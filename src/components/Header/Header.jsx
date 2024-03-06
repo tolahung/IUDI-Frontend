@@ -78,8 +78,12 @@ const Header = () => {
     window.location.href = "/register";
   };
   const handleLogout = () => {
-    localStorage.removeItem("IuDiToken");
-    window.location.href = "/";
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("Bạn chắc khum?"))
+    {
+      localStorage.removeItem("IuDiToken");
+      window.location.href = "/";
+    }
   };
 
   return (
@@ -106,6 +110,7 @@ const Header = () => {
                   <span>Log In</span>
                 </Button>
               ) : (
+                // eslint-disable-next-line no-restricted-globals
                 <Button
                   variant="text-white"
                   size="sm"
