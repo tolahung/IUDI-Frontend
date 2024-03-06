@@ -24,11 +24,13 @@ import bg from "../../images/bg3.jpg"
 
 
 function Profile() {
+  
   const [isLogin, setIsLogin] = useState(false);
   const [userName, setUserName] = useState(null);
   const [profileData, setProfileData] = useState(null);
   const [isModalOpenChangePass, setIsModalOpenChangePass] = useState(false);
   const [isModalOpenGroup, setIsModalOpenGroup] = useState(false);
+  
   useEffect(() => {
     const storedData = localStorage.getItem("IuDiToken");
     const userNameIuDi = localStorage.getItem("UserNameIuDi");

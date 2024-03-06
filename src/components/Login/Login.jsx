@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Modal from "../Modal/Modal";
+// import Modal from "../Modal/Modal";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import background from "../../images/background.jpg";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function LoginForm() {
+  
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
@@ -60,7 +64,7 @@ function LoginForm() {
         Longitude: loginData.Longitude,
         LastLoginIP: loginData.LastLoginIP,
       });
-      setMessage("Login Success");
+      
       setIsSuccess(true);
       console.log("Phản hồi từ API:", response?.data);
       localStorage.setItem("IuDiToken", response?.data?.jwt);
@@ -68,18 +72,31 @@ function LoginForm() {
         "UserNameIuDi",
         response?.data.user.Users[0].Username
       );
+      toast.success('🦄 Wow so easy!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 1,
+        theme: "light",
+        });
+      window.location.href = "/";
     } catch (error) {
-      setIsSuccess(false);
-      setMessage("Password or Username is incorrect");
+      // setIsSuccess(false);
+      // setMessage("Password or Username is incorrect");
+      console.error("Error registering:", error);
+      toast.error(`Register failed! ${error.response.data.message}`, {closeOnClick:true});
     }
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    if (isSuccess) {
-      window.location.href = "/";
-    }
-  };
+  // const closeModal = () => {
+  //   setShowModal(false);
+  //   if (isSuccess) {
+  //     window.location.href = "/";
+  //   }
+  // };
 
   return (
 
@@ -170,14 +187,14 @@ function LoginForm() {
         </div>
       </div>
       <Footer />
-      {showModal && (
+      {/* {showModal && (
         <Modal
           isSuccess={isSuccess}
           title="LOGIN"
           message={message}
           onClose={closeModal}
         />
-      )}
+      )} */}
     </div>
   );
 }
