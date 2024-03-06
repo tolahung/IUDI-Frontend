@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -9,14 +9,6 @@ import registerSchema from "../../schemas/register";
 import { joiResolver } from "@hookform/resolvers/joi";
 
 const RegisterForm = () => {
-
-  const backgroundImageStyle = {
-    backgroundImage: `url(${background})`,
-    backgroundSize: 'cover',
-    // backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    minHeight: '100vh',
-  };
 
   const {
     register,

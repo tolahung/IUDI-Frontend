@@ -1,17 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import Modal from "../Modal/Modal";
+import Modal from "../Modal/Modal";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import background from "../../images/background.jpg";
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useForm } from 'react-hook-form';
+import loginSchema from "../../schemas/login";
+import { joiResolver } from "@hookform/resolvers/joi";
 
 function LoginForm() {
-  
-  const [showModal, setShowModal] = useState(false);
-  const [message, setMessage] = useState("");
+  const backgroundImageStyle = {
+    backgroundImage: `url(${background})`,
+    backgroundSize: 'cover',
+    // backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    minHeight: '100vh',
+  };
+
+  const { register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({ resolver: joiResolver(loginSchema) })
+
+
+  // const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [loginData, setLoginData] = useState({
     Username: "",
@@ -20,14 +34,6 @@ function LoginForm() {
     Longitude: "",
     LastLoginIP: "",
   });
-
-  const backgroundImageStyle = {
-    backgroundImage: `url(${background})`,
-    backgroundSize: 'cover',
-    // backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    minHeight: '100vh',
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,14 +53,9 @@ function LoginForm() {
     fetchData();
   }, []);
 
-  const handleLoginChange = (e) => {
-    const { name, value } = e.target;
-    setLoginData({ ...loginData, [name]: value });
-  };
 
   const handleLogin = async (e) => {
-    setShowModal(true);
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const response = await axios.post("https://api.iudi.xyz/api/login", {
         Username: loginData.Username,
@@ -64,7 +65,7 @@ function LoginForm() {
         Longitude: loginData.Longitude,
         LastLoginIP: loginData.LastLoginIP,
       });
-      
+
       setIsSuccess(true);
       console.log("Phản hồi từ API:", response?.data);
       localStorage.setItem("IuDiToken", response?.data?.jwt);
@@ -72,6 +73,7 @@ function LoginForm() {
         "UserNameIuDi",
         response?.data.user.Users[0].Username
       );
+
       toast.success('🦄 Wow so easy!', {
         position: "bottom-right",
         autoClose: 5000,
@@ -82,21 +84,18 @@ function LoginForm() {
         progress: 1,
         theme: "light",
         });
-      window.location.href = "/";
+
+        window.location.href = "/";
+
     } catch (error) {
       // setIsSuccess(false);
       // setMessage("Password or Username is incorrect");
       console.error("Error registering:", error);
-      toast.error(`Register failed! ${error.response.data.message}`, {closeOnClick:true});
+      toast.error(`Register failed! ${error.response.data.message}`, { closeOnClick: true });
     }
   };
 
-  // const closeModal = () => {
-  //   setShowModal(false);
-  //   if (isSuccess) {
-  //     window.location.href = "/";
-  //   }
-  // };
+
 
   return (
 
@@ -108,9 +107,10 @@ function LoginForm() {
       <div className="flex items-center justify-center mt-20">
         <div className="max-w-md w-full mx-auto">
           <form
-            onSubmit={handleLogin}
+            onSubmit={handleSubmit(handleLogin)}
             className="bg-zinc-900 shadow-md rounded px-8 pt-6 pb-8 mb-4"
           >
+            {/* <ToastContainer/> */}
             <h3
               style={{
                 color: "rgba(44,186,55,0.8127626050420168)",
@@ -135,10 +135,13 @@ function LoginForm() {
                 type="text"
                 placeholder="Username"
                 name="Username"
-                value={loginData.Username}
-                onChange={handleLoginChange}
-                required
+                {...register('Username')}
               />
+
+              {errors.Username && (
+                <p className="text-red-500 text-sm font-bold mt-2"> {errors.Username.message} </p>
+              )}
+
             </div>
             <div className="mb-4">
               <label
@@ -156,10 +159,11 @@ function LoginForm() {
                 type="password"
                 placeholder="Password"
                 name="Password"
-                value={loginData.Password}
-                onChange={handleLoginChange}
-                required
+                {...register('Password')}
               />
+              {errors.Password && (
+                <p className="text-red-500 text-sm font-bold mt-2"> {errors.Password.message} </p>
+              )}
             </div>
             <div className="mb-4">
               <button
@@ -187,14 +191,7 @@ function LoginForm() {
         </div>
       </div>
       <Footer />
-      {/* {showModal && (
-        <Modal
-          isSuccess={isSuccess}
-          title="LOGIN"
-          message={message}
-          onClose={closeModal}
-        />
-      )} */}
+
     </div>
   );
 }

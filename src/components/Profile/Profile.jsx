@@ -10,7 +10,6 @@ import {
   CardBody,
   CardFooter,
   Typography,
-  Tooltip,
 } from "@material-tailwind/react";
 import {
   FaUser,
