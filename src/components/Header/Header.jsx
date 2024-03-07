@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Navbar,
   MobileNav,
   Typography,
   Button,
@@ -58,16 +57,7 @@ const Header = () => {
           Profile
         </a>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="forgot-password" className="flex items-center">
-          Forgot Password
-        </a>
-      </Typography>
+
     </ul>
   );
 
@@ -79,8 +69,7 @@ const Header = () => {
   };
   const handleLogout = () => {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm("Bạn chắc khum?"))
-    {
+    if (confirm("Are you sure ? ")) {
       localStorage.removeItem("IuDiToken");
       window.location.href = "/";
     }
@@ -104,7 +93,7 @@ const Header = () => {
                 <Button
                   variant="text-white"
                   size="sm"
-                  className="hidden lg:inline-block"
+                  className="hidden lg:inline-block mr-4"
                   onClick={handleLogin}
                 >
                   <span>Log In</span>
@@ -114,21 +103,25 @@ const Header = () => {
                 <Button
                   variant="text-white"
                   size="sm"
-                  className="hidden lg:inline-block"
+                  className="hidden lg:inline-block mr-4"
                   onClick={handleLogout}
                 >
                   <span>Log Out</span>
                 </Button>
               )}
 
-              <Button
+         {
+          isLogin ? ('') : (
+                <Button
                 variant="gradient"
                 size="sm"
-                className="hidden lg:inline-block"
+                className="hidden lg:inline-block mr-4"
                 onClick={handleRegister}
               >
                 <span>Sign in</span>
               </Button>
+              )
+         }
             </div>
             <IconButton
               variant="text"
@@ -194,16 +187,6 @@ const Header = () => {
                 <span>Log In</span>
               </Button>
             )}
-
-            <Button
-              fullWidth
-              variant="gradient"
-              size="sm"
-              className=""
-              onClick={handleRegister}
-            >
-              <span>Sign in</span>
-            </Button>
           </div>
         </MobileNav>
       </div>

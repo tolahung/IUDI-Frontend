@@ -115,10 +115,10 @@ function Profile() {
                   className="flex items-center justify-center w-max"
                   textGradient
                 >
-                  <FaPhone className="mr-3" />
+                  {/* <FaPhone className="mr-3" />
                   {profileData?.Users[0].Phone
                     ? profileData?.Users[0].Phone
-                    : "null"}
+                    : "null"} */}
                 </Typography>
 
                 <Typography

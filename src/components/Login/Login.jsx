@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
-import Modal from "../Modal/Modal";
+// import Modal from "../Modal/Modal";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import background from "../../images/background.jpg";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from 'react-hook-form';
 import loginSchema from "../../schemas/login";
@@ -22,7 +22,7 @@ function LoginForm() {
 
   const { register,
     handleSubmit,
-    reset,
+    // reset,
     setValue,
     formState: { errors, isValid },
   } = useForm({ resolver: joiResolver(loginSchema) })
@@ -44,33 +44,33 @@ function LoginForm() {
 
   const navigate = useNavigate()
   const handleLogin = async (data) => {
-    if(isValid){
-    try {
-      const response = await axios.post("https://api.iudi.xyz/api/login", data);
+    if (isValid) {
+      try {
+        const response = await axios.post("https://api.iudi.xyz/api/login", data);
 
-      console.log("Phản hồi từ API:", response?.data);
-      localStorage.setItem("IuDiToken", response?.data?.jwt);
-      localStorage.setItem(
-        "UserNameIuDi",
-        response?.data.user.Users[0].Username
-      );
+        console.log("Phản hồi từ API:", response?.data);
+        localStorage.setItem("IuDiToken", response?.data?.jwt);
+        localStorage.setItem(
+          "UserNameIuDi",
+          response?.data.user.Users[0].Username
+        );
 
-      toast.success('Login successfully!', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 1,
-        theme: "light",
+        toast.success('Login successfully!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 1,
+          theme: "light",
         });
-        setTimeout(navigate('/',5000))
-    } catch (error) {
-      console.error("Error registering:", error);
-      toast.error(`Register failed! ${error.response.data.message}`, { closeOnClick: true });
+        setTimeout(navigate('/', 5000))
+      } catch (error) {
+        console.error("Error registering:", error);
+        toast.error(`Register failed! ${error.response.data.message}`, { closeOnClick: true });
+      }
     }
-  }
     else toast.warning("An error occur...")
   };
 
@@ -147,7 +147,7 @@ function LoginForm() {
                 style={{
                   background: "rgba(44,186,55,0.8127626050420168)",
                 }}
-                className="w-full py-2 px-4 font-bold rounded text-white focus:outline-none focus:shadow-outline"
+                className="w-full mt-2 py-2 px-4 font-bold rounded text-white focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Login
@@ -162,6 +162,11 @@ function LoginForm() {
               Don't have an account ?{" "}
               <a href="/register" className="text-500">
                 <strong>REGISTER</strong>
+              </a>
+            </p>
+            <p className="text-green-600 mt-2 text-center">
+              <a href="/forgot-password" className="text-200">
+                <strong>Forgot password ?</strong>
               </a>
             </p>
           </form>

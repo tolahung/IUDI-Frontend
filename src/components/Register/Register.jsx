@@ -16,7 +16,7 @@ const RegisterForm = () => {
     setValue,
     reset,
     formState: { errors, isValid },
-  } = useForm({ resolver: joiResolver(registerSchema)});
+  } = useForm({ resolver: joiResolver(registerSchema) });
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -29,11 +29,11 @@ const RegisterForm = () => {
           'Longitude', longitude
         );
         setValue(
-          'avatarLink','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9Zde21fi2AnY9_C17tqYi8DO25lRM_yAa7Q&usqp=CAU&fbclid=IwAR16g1ONptpUiKuDIt37LRxU3FTZck1cv9HDywe9VWxWSQBwcuGNfB7JUw4'
+          'avatarLink', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9Zde21fi2AnY9_C17tqYi8DO25lRM_yAa7Q&usqp=CAU&fbclid=IwAR16g1ONptpUiKuDIt37LRxU3FTZck1cv9HDywe9VWxWSQBwcuGNfB7JUw4'
         )
-        setValue('LastLoginIP','1')
+        setValue('LastLoginIP', '1')
       });
-      
+
     } else {
       alert("Trình duyệt không hỗ trợ geolocation hoặc trình duyệt chặn truy cập vị trí, vui lòng kiểm tra!.");
     }
@@ -44,22 +44,22 @@ const RegisterForm = () => {
   }, []);
 
   const handleSubmitForm = async (data) => {
-    if(isValid){
-    try {
-      const response = await axios.post(
-        "https://api.iudi.xyz/api/register",
-        data
-      );
-      (response.data.status === 200) && toast.success("Register successfully!") && reset();
-    } catch (error) {
-      console.error("Error registering:", error);
-      toast.error(`Register failed! ${error.response.data.message}`, {closeOnClick:true});
+    if (isValid) {
+      try {
+        const response = await axios.post(
+          "https://api.iudi.xyz/api/register",
+          data
+        );
+        (response.data.status === 200) && toast.success("Register successfully!") && reset();
+      } catch (error) {
+        console.error("Error registering:", error);
+        toast.error(`Register failed! ${error.response.data.message}`, { closeOnClick: true });
+      }
     }
-  }
   };
 
 
-  
+
   return (
     <div
       style={
@@ -105,7 +105,7 @@ const RegisterForm = () => {
               {...register("Username")}
             />
             {errors.Username && (
-            <p className="text-red-500 text-sm font-bold mt-2"> {errors.Username.message} </p>
+              <p className="text-red-500 text-sm font-bold mt-2"> {errors.Username.message} </p>
             )}
           </div>
           <div className="mb-4">
@@ -127,7 +127,7 @@ const RegisterForm = () => {
               {...register("FullName")}
             />
             {errors.FullName && (
-            <p className="text-red-500 text-sm font-bold mt-2"> {errors.FullName.message} </p>
+              <p className="text-red-500 text-sm font-bold mt-2"> {errors.FullName.message} </p>
             )}
           </div>
           <div className="mb-4">
@@ -149,7 +149,7 @@ const RegisterForm = () => {
               {...register("Email")}
             />
             {errors.Email && (
-            <p className="text-red-500 text-sm font-bold mt-2"> {errors.Email.message} </p>
+              <p className="text-red-500 text-sm font-bold mt-2"> {errors.Email.message} </p>
             )}
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
@@ -165,6 +165,26 @@ const RegisterForm = () => {
               name="LastLoginIP"
               {...register("LastLoginIP")}
             />
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2 mt-3"
+                  htmlFor="email"
+                  style={{
+                    color: "rgba(44,186,55,0.8127626050420168)",
+                  }}
+                >
+                  Gender
+                </label>
+
+                <select className="border rounded w-full py-2 px-3" id="gender" {...register("Gender")}>
+                  <option>Nam</option>
+                  <option>Nữ</option>
+                  <option>Đồng tính Nam</option>
+                  <option>Đồng tính nữ</option>
+                </select>
+                {errors.Gender && (
+                  <p className="text-red-500 text-sm font-bold mt-2"> {errors.Gender.message} </p>
+                )}
+
 
           </div>
           <div className="mb-4">
@@ -208,7 +228,7 @@ const RegisterForm = () => {
               {...register("Cf_Password")}
             />
             {errors.Cf_Password && (
-            <p className="text-red-500 text-sm font-bold mt-2"> {errors.Cf_Password.message} </p>
+              <p className="text-red-500 text-sm font-bold mt-2"> {errors.Cf_Password.message} </p>
             )}
           </div>
           <div className="mb-4">
@@ -235,11 +255,11 @@ const RegisterForm = () => {
             </a>
           </p>
         </form>
-      </div>
+      </div >
 
       <Footer />
-      
-    </div>
+
+    </div >
   );
 };
 
