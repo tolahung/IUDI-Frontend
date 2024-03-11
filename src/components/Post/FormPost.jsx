@@ -43,6 +43,17 @@ function FormPost() {
     }
   };
 
+  const [avatarUrl, setAvatarUrl] = useState(() => {
+    // Lấy data URL từ localStorage nếu có
+    return localStorage.getItem('avatarUrl') || profileData?.Users[0].avatarLink;
+  });
+  useEffect(() => {
+    // Đọc URL ảnh từ localStorage khi component được render
+    const savedAvatarUrl = localStorage.getItem('avatarUrl');
+    if (savedAvatarUrl) {
+      setAvatarUrl(savedAvatarUrl);
+    }
+  }, [])
   return (
     <>
       <div className="container mx-auto px-4 mt-10">
@@ -50,7 +61,7 @@ function FormPost() {
           <div>
             <div className="flex items-center my-4">
               <img
-                src={profileData?.Users[0].avatarLink}
+                src={avatarUrl}
                 alt=""
                 className="w-10 h-10 rounded-full mr-2"
               />

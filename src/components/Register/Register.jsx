@@ -57,9 +57,6 @@ const RegisterForm = () => {
       }
     }
   };
-
-
-
   return (
     <div
       style={

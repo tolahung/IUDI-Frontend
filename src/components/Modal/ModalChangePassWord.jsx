@@ -12,7 +12,7 @@ const ModalChangePassWord = ({ userId, isOpen, onClose }) => {
       setMessage("New passwords don't match");
       return;
     }
-
+       
     try {
       const response = await axios.patch(
         `https://api.iudi.xyz/api/profile/change_password/${userId}`,
