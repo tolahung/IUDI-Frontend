@@ -65,7 +65,7 @@ function LoginForm() {
           progress: 1,
           theme: "light",
         });
-        setTimeout(navigate('/', 5000))
+        setTimeout(navigate('/personal', 5000))
       } catch (error) {
         console.error("Error registering:", error);
         toast.error(`Register failed! ${error.response.data.message}`, { closeOnClick: true });
