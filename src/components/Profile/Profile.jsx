@@ -173,7 +173,7 @@ function Profile() {
                 </button>
                 <button
                   className="mt-4 flex bg-green-600 text-white px-4 py-2 rounded font-bold hover:bg-white hover:text-black"
-                onClick={()=>navi('/profile/edit',{state:profileData.Users[0]})} >
+                onClick={()=>navi('/personal')} >
                   Edit Profile
                 </button>
               </CardFooter>
