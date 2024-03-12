@@ -17,7 +17,7 @@ const Header = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
-
+  const username = localStorage.getItem("UserNameIuDi")
   useEffect(() => {
     const storedData = localStorage.getItem("IuDiToken");
     if (storedData) {
@@ -53,7 +53,7 @@ const Header = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="profile" className="flex items-center">
+        <a href={`profile/${username}`} className="flex items-center">
           Profile
         </a>
       </Typography>

@@ -6,6 +6,7 @@ import Register from './components/Register/Register';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import Profile from './components/Profile/Profile';
 import Posts from './components/Post/Posts';
+import EditProfile from './components/EditProfile/EditProfile';
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:username" element={<Profile />} />
         <Route path="/posts" element={<Posts />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
       </Routes>
     </Router>
   );
