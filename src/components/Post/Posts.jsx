@@ -55,8 +55,6 @@ function Posts() {
     fetchGroups();
   }, []);
 
-  console.log(groups);
-
   // pagination
   const [active, setActive] = useState(1);
 
@@ -88,7 +86,7 @@ function Posts() {
     >
       <Header />
       <div className="container mx-auto px-4">
-        <h1 className="text-2xl text-white font-extrabold font-bold mb-4 mt-5">
+        <h1 className="text-2xl text-white font-bold mb-4 mt-5">
           Groups
         </h1>
         <div className="flex">

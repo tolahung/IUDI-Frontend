@@ -54,7 +54,7 @@ function LoginForm() {
           "UserNameIuDi",
           response?.data.user.Users[0].Username
         );
-
+        localStorage.setItem("InforCurrentUser", JSON.stringify(response?.data?.user.Users[0]));
         toast.success('Login successfully!', {
           position: "bottom-right",
           autoClose: 5000,
