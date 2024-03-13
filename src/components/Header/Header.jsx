@@ -58,6 +58,13 @@ const Header = () => {
         </a>
       </Typography>
 
+      {isLogin ? (
+        <Typography>
+          <p>Chào mừng {username}</p>
+        </Typography>
+      ) : ('')}
+
+
     </ul>
   );
 
@@ -75,6 +82,7 @@ const Header = () => {
     }
   };
 
+  console.log(username);
   return (
     <>
       <div className="text-white">
@@ -110,18 +118,18 @@ const Header = () => {
                 </Button>
               )}
 
-         {
-          isLogin ? ('') : (
-                <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block mr-4"
-                onClick={handleRegister}
-              >
-                <span>Sign in</span>
-              </Button>
-              )
-         }
+              {
+                isLogin ? ('') : (
+                  <Button
+                    variant="gradient"
+                    size="sm"
+                    className="hidden lg:inline-block mr-4"
+                    onClick={handleRegister}
+                  >
+                    <span>Sign in</span>
+                  </Button>
+                )
+              }
             </div>
             <IconButton
               variant="text"
