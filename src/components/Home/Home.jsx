@@ -16,7 +16,7 @@ function Home() {
 
   
   return (
-      <div className="w-full h-screen " style={backgroundImageStyle}>
+      <div className="w-full h-screen flex flex-col justify-between" style={backgroundImageStyle}>
         <Header />
         <LayoutHome/>
         <Footer 

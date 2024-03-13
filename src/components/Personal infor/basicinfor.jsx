@@ -1,11 +1,10 @@
 
 import { React, useState, useEffect } from "react";
 import background from '../../images/bg3.jpg'
-// import Header from "../Header/Header";
+import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import Header from "../Header/Header";
 
 
 function Personal() {
@@ -65,7 +64,7 @@ function Personal() {
 
         <div style={backgroundImage} className="" >
             <Header />
-            <div class="bg-[#252525] p-[15px]  mx-auto h-auto w-[490px] border-2 border-green-500 rounded-lg shadow-lg">
+            <div class="bg-[#252525] p-[15px]  mx-auto h-auto w-[490px] border-2 border-green-500 rounded-lg shadow-lg mt-[50px]">
                 <div className="my-[15px] flex flex-col items-center ">
                     <h1 className="text-3xl font-semibold text-green-600">Thông tin cá nhân</h1>
                     <p className="text-gray-300"> hãy điền thông tin cá nhân để chúng ta hiểu nhau hơn</p>
