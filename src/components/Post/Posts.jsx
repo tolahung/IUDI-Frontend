@@ -7,6 +7,7 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import FormPost from "./FormPost";
 import { Tooltip } from "@material-tailwind/react";
+import background from '../../images/bg3.jpg'
 
 const posts = [
   {
@@ -38,6 +39,14 @@ const posts = [
   },
 ];
 function Posts() {
+  const backgroundImageStyle = {
+    backgroundImage: `url(${background})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    minHeight: 'screen',
+  };
+
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -47,16 +56,15 @@ function Posts() {
           "https://api.iudi.xyz/api/forum/group/all_group"
         );
         setGroups(response.data.data);
+        console.log('response',response);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchGroups();
   }, []);
 
   console.log(groups);
-
   // pagination
   const [active, setActive] = useState(1);
 
@@ -80,15 +88,11 @@ function Posts() {
 
   return (
     <div
-      style={{
-        background:
-          "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
-        minHeight: "100vh",
-      }}
+      style={backgroundImageStyle}
     >
       <Header />
       <div className="container mx-auto px-4">
-        <h1 className="text-2xl text-white font-extrabold font-bold mb-4 mt-5">
+        <h1 className="text-2xl text-white font-bold mb-4 mt-5">
           Groups
         </h1>
         <div className="flex">

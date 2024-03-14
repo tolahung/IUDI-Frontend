@@ -24,6 +24,7 @@ function FormPost() {
           `https://api.iudi.xyz/api/profile/${userName}`
         );
         setProfileData(response.data);
+        console.log('profile', response.data);
       } catch (error) {
         console.error("Error fetching profile data:", error);
       }
