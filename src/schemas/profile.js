@@ -8,7 +8,8 @@ const profileSchema = Joi.object({
     Bio: Joi.string(),
     BirthDate: Joi.string(),
     BirthPlace: Joi.string(),
-    CurrentDate: Joi.string(),
+    CurrentAdd: Joi.string(),
+    Phone: Joi.string(),
 })
 
 export default profileSchema
