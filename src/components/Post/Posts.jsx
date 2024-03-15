@@ -5,8 +5,10 @@ import PostUser from "./PostUser";
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
+// import FormPost from "./FormPost";
+// import { Tooltip } from "@material-tailwind/react";
+import background from '../../images/bg3.jpg'
 import FormPost from "./FormPost";
-import { Tooltip } from "@material-tailwind/react";
 
 const posts = [
   {
@@ -38,8 +40,19 @@ const posts = [
   },
 ];
 function Posts() {
-  const [groups, setGroups] = useState([]);
+  const backgroundImageStyle = {
+    backgroundImage: `url(${background})`,
+    // backgroundSize: 'cover',
+    // backgroundPosition: 'center',
+    // backgroundRepeat: 'no-repeat',
+    minHeight: '100vh',
+  };
 
+  const [group, setGroups] = useState([]);
+  const [grcontent, setGrcontent] = useState([]);
+  const [titlegr, settitlegr] = useState('1');
+
+  //all group
   useEffect(() => {
     const fetchGroups = async () => {
       try {
@@ -47,14 +60,26 @@ function Posts() {
           "https://api.iudi.xyz/api/forum/group/all_group"
         );
         setGroups(response.data.data);
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchGroups();
   }, []);
 
+  //each group post
+  useEffect(() => {
+    const fetchcontent = async () => {
+      try {
+        const res = await axios.get(`https://api.iudi.xyz/api/forum/group/${titlegr}/1/1000`);
+        setGrcontent(res.data.list_posts);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchcontent();
+  }, [titlegr])
   // pagination
   const [active, setActive] = useState(1);
 
@@ -76,62 +101,98 @@ function Posts() {
     setActive(active - 1);
   };
 
+  console.log('all group',group);
+  console.log('id group',titlegr);
+  console.log('grcontent',grcontent);
   return (
-    <div
-      style={{
-        background:
-          "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="" style={backgroundImageStyle}>
       <Header />
-      <div className="container mx-auto px-4">
-        <h1 className="text-2xl text-white font-bold mb-4 mt-5">
-          Groups
-        </h1>
-        <div className="flex">
-          {groups.map((group, index) => (
-            <Tooltip key={index} content={group.GroupName}>
-              <div className="p-4 rounded-lg cursor-pointer">
-                <img
-                  src={group?.avatarLink}
-                  alt={group?.GroupName}
-                  className="w-16 h-16 rounded-full mx-auto mb-2"
-                />
-              </div>
-            </Tooltip>
-          ))}
-        </div>
-      </div>
-      <FormPost />
-      <PostUser listPost={posts} />
-      <div className="bd-white flex justify-center pb-5">
-        <div className="flex items-center gap-4">
-          <Button
-            variant="text"
-            className="flex items-center gap-2"
-            onClick={prev}
-            disabled={active === 1}
-          >
-            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />
-          </Button>
-          <div className="flex items-center gap-2">
-            <IconButton {...getItemProps(1)}>1</IconButton>
-            <IconButton {...getItemProps(2)}>2</IconButton>
-            <IconButton {...getItemProps(3)}>3</IconButton>
-            <IconButton {...getItemProps(4)}>4</IconButton>
-            <IconButton {...getItemProps(5)}>5</IconButton>
+      <div className="w-[1500px] mx-auto">
+        <div className="grid grid-cols-4 gap-[30px]">
+          {/* Phần 1 */}
+          <div className="col-span-1">
+            <div className="flex flex-col fixed">
+              <h1 className="text-white ml-[30px] mb-[30px] font-bold text-[25px]">GROUPS</h1>
+              {group.map((groups) => {
+                return (
+                  <>
+                    <div 
+                    key={groups.GroupID} 
+                    className=" flex rounded-lg cursor-pointer p-[10px] ml-[30px] hover:bg-green-400" 
+                    onClick={()=>{settitlegr(groups.GroupID)}}
+                    style={grcontent === groups.GroupID ? {backgroundColor: 'green'} : {}}
+                    >
+                      <img
+                        src={groups?.avatarLink}
+                        alt={groups?.GroupName}
+                        className="w-[60px] h-[60px] rounded-full border-2 border-gray-50"
+                      />
+                      <p className="ml-[10px] text-white mt-[17px]">{groups.GroupName}</p>
+                    </div>
+                  </>
+                )
+              })}
+            </div>
           </div>
-          <Button
-            variant="text"
-            className="flex items-center gap-2"
-            onClick={next}
-            disabled={active === 5}
-          >
-            <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
-          </Button>
+
+          {/* Phần 2 */}
+          <div className="col-span-2 w-[600px]">
+            <FormPost />
+            <PostUser
+              listPost={grcontent}
+            />
+            <div className="bd-white flex justify-center pb-5">
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="text"
+                  className="flex items-center gap-2"
+                  onClick={prev}
+                  disabled={active === 1}
+                >
+                  <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />
+                </Button>
+                <div className="flex items-center gap-2">
+                  <IconButton {...getItemProps(1)}>1</IconButton>
+                  <IconButton {...getItemProps(2)}>2</IconButton>
+                  <IconButton {...getItemProps(3)}>3</IconButton>
+                  <IconButton {...getItemProps(4)}>4</IconButton>
+                  <IconButton {...getItemProps(5)}>5</IconButton>
+                </div>
+                <Button
+                  variant="text"
+                  className="flex items-center gap-2"
+                  onClick={next}
+                  disabled={active === 5}
+                >
+                  <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Phần 3 */}
+          <div className="col-span-1">
+            <div className="flex flex-col fixed">
+              <h1 className="text-white ml-[30px] mb-[30px] font-bold text-[25px]">Những người tương thích</h1>
+              {group.map((groups) => {
+                return (
+                  <>
+                    <div className="rounded-lg cursor-pointer flex ml-[30px] onClick">
+                      <img
+                        src={groups?.avatarLink}
+                        alt={groups?.GroupName}
+                        className="w-[60px] h-[60px] rounded-full mb-[20px] border-2 border-gray-50"
+                      />
+                      <p className="ml-[10px] w-[400px] text-white mt-[17px]">{groups.GroupName}</p>
+                    </div>
+                  </>
+                )
+              })}
+            </div>
+          </div>
         </div>
       </div>
+      {/* <Footer /> */}
     </div>
   );
 }

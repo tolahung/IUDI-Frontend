@@ -3,7 +3,7 @@ import { Typography } from "@material-tailwind/react";
 const currentYear = new Date().getFullYear();
 const Footer = () => {
   return (
-    <div className="text-white bottom-0 w-full mt-11">
+    <div className="text-white w-full mt-11">
       <div className="mx-auto w-full max-w-7xl px-8">
         <div className="w-full justify-center py-4 ">
           <div>

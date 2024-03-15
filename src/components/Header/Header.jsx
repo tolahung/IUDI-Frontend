@@ -68,6 +68,13 @@ const Header = () => {
         </a>
       </Typography>
 
+      {isLogin ? (
+        <Typography>
+          <p>Chào mừng {username}</p>
+        </Typography>
+      ) : ('')}
+
+
     </ul>
   );
 
@@ -85,10 +92,11 @@ const Header = () => {
     }
   };
 
+  console.log(username);
   return (
-    <>
-      <div className="text-white">
-        <div className="flex items-center justify-between text-blue-gray-900">
+    <div className=""> 
+      <div className="text-white pb-[100px]" >
+        <div className="flex items-center justify-between text-blue-gray-900 fixed left-0 right-0">
           <Typography
             as="a"
             href="/"
@@ -96,7 +104,7 @@ const Header = () => {
           >
             <img src={Logo} alt="Example" />
           </Typography>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 ">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
               {!isLogin ? (
@@ -120,18 +128,18 @@ const Header = () => {
                 </Button>
               )}
 
-         {
-          isLogin ? ('') : (
-                <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block mr-4"
-                onClick={handleRegister}
-              >
-                <span>Sign in</span>
-              </Button>
-              )
-         }
+              {
+                isLogin ? ('') : (
+                  <Button
+                    variant="gradient"
+                    size="sm"
+                    className="hidden lg:inline-block mr-4"
+                    onClick={handleRegister}
+                  >
+                    <span>Sign in</span>
+                  </Button>
+                )
+              }
             </div>
             <IconButton
               variant="text"
@@ -173,7 +181,7 @@ const Header = () => {
           </div>
         </div>
 
-        <MobileNav open={openNav}>
+        {/* <MobileNav open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             {isLogin ? (
@@ -198,9 +206,9 @@ const Header = () => {
               </Button>
             )}
           </div>
-        </MobileNav>
+        </MobileNav> */}
       </div>
-    </>
+    </div>
   );
 };
 export default Header;

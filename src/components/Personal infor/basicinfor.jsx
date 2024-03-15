@@ -1,6 +1,7 @@
 
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import background from '../../images/bg3.jpg'
+import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -151,6 +152,7 @@ function Personal() {
 
                 <div className="flex items-end justify-center">
                     <img
+<
                         src={display}
                         alt="personal"
                         className="w-[100px] h-[100px] rounded-[10px] mr-[5px]"
