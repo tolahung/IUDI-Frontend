@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import axios from "axios";
 import profileSchema from "../../schemas/profile";
+import { Button } from "@material-tailwind/react";
 
 function Personal() {
     //Logic right here
@@ -70,10 +71,80 @@ function Personal() {
             console.log(error)
           }
         };
+        const [radius, setRadius] = useState('0')
+        const [age,setAge] = useState('12')
+        const [gender1, setGender1] = useState('Nam')
+        const onHandleChangeRadius = (e) => {
+            setRadius(e.target.value)
+        }
+        const onHandleChangeAge = (e) => {
+            setAge(e.target.value)
+        }
+        const onHandleChangeGender = (e) =>{
+            setGender1(e.target.value)
+        }
+        const onHandleSave = () =>{
+            const findingSetting = {
+                radius: radius,
+                maxAge: age,
+                gender: gender1
+            }
+            localStorage.setItem("findingSetting",JSON.stringify(findingSetting))
+            toast.success("Lưu cài đặt thành công!", {autoClose:1000})
+        }
     return (
         <div style={backgroundImage} className="" >
             <Header/>
-            <div class="bg-[#252525] p-[20px] px-[50px] mx-auto w-[490px] border-2 border-green-500 rounded-lg shadow-lg">
+            <div className="relative">
+            <div className="fixed top-0 left-0 w-[500px] border-r-2 border-white min-h-[100vh]">
+                <div className="mt-[200px] ml-[50px] mr-[50px]">
+                <h1 className="text-3xl font-semibold text-green-600 mb-11">Cài đặt tìm kiếm</h1>
+                <label
+                    className=" text-gray-700 text-sm font-bold mb-2 mt-8"
+                    htmlFor="fullname"
+                    style={{
+                         color: "rgba(44,186,55,0.8127626050420168)",
+                    }}
+                    >
+                    <div className="flex justify-between">
+                        <span className="text-white">Khoảng cách (m): </span> 
+                        <span className="font-bold text-white">{radius}</span>
+                    </div>
+                    <input type="range" min={0} max={5000} onChange={onHandleChangeRadius} className="range mt-4 range-success range-xs range-infor" />
+                </label>
+                <label
+                  className="block text-white text-sm font-bold mb-2 mt-3"
+                  htmlFor="genderr"
+                >
+                  Xu hướng
+                </label>
+
+                <select onChange={onHandleChangeGender} className=" w-full py-2 mt-2 mb-4 px-3 bg-transparent focus:outline-none text-white" defaultValue="Nam" id="genderr">
+                  <option className="text-green-600">Nam</option>
+                  <option className="text-green-600">Nữ</option>
+                  <option className="text-green-600">Đồng tính Nam</option>
+                  <option className="text-green-600">Đồng tính nữ</option>
+                </select>
+                <label
+                    className=" text-gray-700 text-sm font-bold mb-2 mt-8"
+                    htmlFor="fullname"
+                    style={{
+                         color: "rgba(44,186,55,0.8127626050420168)",
+                    }}
+                    >
+                    <div className="flex justify-between">
+                        <span className="text-white">Độ tuổi:</span> 
+                        <span className="font-bold text-white">Từ {age} trở lên</span>
+                    </div>
+                    <input type="range" min={12} max={100} onChange={onHandleChangeAge} className="range mt-4 range-success range-xs range-infor" />
+                </label>
+                <button onClick={onHandleSave} className="inline-block bg-green-600 text-white rounded shadow py-2 px-11 text-sm mt-8">
+                    Lưu cài đặt
+                    </button>
+                </div> 
+            </div>
+            <div className="border-t-2 border-white">
+            <div class="bg-[#252525] p-[20px] mt-[60px] ml-[900px] px-[50px] mx-auto w-[490px] border-2 border-green-500 rounded-lg shadow-lg">
                 <div className="my-[15px] flex flex-col items-center ">
                     <h1 className="text-3xl font-semibold text-green-600">Thông tin cá nhân</h1>
                 </div>
@@ -99,7 +170,7 @@ function Personal() {
                 </div>
                 <form onSubmit={handleSubmit(handleChangePassword)}>
                     <div className="mb-8 mt-3">
-                    <label
+                        <label
                         className="block text-gray-700 text-sm font-bold mb-2 mt-8"
                         htmlFor="fullname"
                         style={{
@@ -294,6 +365,8 @@ function Personal() {
                     </button>
                 </form>
 
+            </div>
+            </div>
             </div>
             <Footer />
         </div>

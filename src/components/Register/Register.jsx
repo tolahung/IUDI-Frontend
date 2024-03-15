@@ -94,7 +94,7 @@ const RegisterForm = () => {
               Username
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border dark:text-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="text"
               placeholder="Username"
@@ -116,7 +116,7 @@ const RegisterForm = () => {
               Full Name
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded dark:text-white w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="fullName"
               type="text"
               placeholder="Full Name"
@@ -138,7 +138,7 @@ const RegisterForm = () => {
               Email
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full dark:text-white py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
               placeholder="Email"
@@ -149,14 +149,14 @@ const RegisterForm = () => {
               <p className="text-red-500 text-sm font-bold mt-2"> {errors.Email.message} </p>
             )}
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
+              className="shadow appearance-none border rounded dark:text-white w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
               id="avatarLink"
               type="text"
               name="avatarLink"
               {...register("avatarLink")}
             />
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
+              className="shadow appearance-none border rounded dark:text-white w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
               id="LastLoginIP"
               type="text"
               name="LastLoginIP"
@@ -195,7 +195,7 @@ const RegisterForm = () => {
               Password
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full dark:text-white py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="Password"
@@ -217,7 +217,7 @@ const RegisterForm = () => {
               Confirm Password
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full dark:text-white py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="cf_password"
               type="password"
               placeholder="Confirm Password"
