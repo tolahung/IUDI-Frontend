@@ -43,6 +43,16 @@ const Header = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
+        <a href="/finding" className="flex items-center">
+          Finding
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
         <a href="posts" className="flex items-center">
           Post
         </a>

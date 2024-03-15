@@ -8,6 +8,7 @@ import Profile from './components/Profile/Profile';
 import Posts from './components/Post/Posts';
 import Personal from './components/Personal infor/basicinfor';
 import EditProfile from './components/EditProfile/EditProfile';
+import Finding from './components/Finding/Finding';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/posts" element={<Posts />} />
         <Route path="/personal" element={<Personal />} />
         <Route path="/profile/edit" element={<EditProfile />} />
+        <Route path="/finding" element={<Finding />} />
       </Routes>
     </Router>
   );

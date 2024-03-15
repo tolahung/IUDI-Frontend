@@ -68,7 +68,6 @@ function Posts() {
     fetchGroups();
   }, []);
 
-
   //each group post
   useEffect(() => {
     const fetchcontent = async () => {
@@ -81,8 +80,6 @@ function Posts() {
     }
     fetchcontent();
   }, [titlegr])
-
-
   // pagination
   const [active, setActive] = useState(1);
 
