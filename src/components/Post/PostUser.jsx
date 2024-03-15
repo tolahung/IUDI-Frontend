@@ -2,10 +2,10 @@ import React from "react";
 
 const PostUser = ({ listPost }) => {
   return (
-    <div className="flex justify-center items-center mt-5">
-      <div className="max-w-lg w-full">
+    <div className="flex mt-5">
+      <div className=" w-full">
         {listPost?.map((item, index) => (
-          <form key={index} className="shadow-md p-4 mb-4  bg-[#292929] rounded-[10px] border-2  border-green-500">
+          <form key={index} className="bg-[#292929] shadow-md rounded-md p-4 mb-4 border-2  border-green-500">
             <div className="flex items-center mb-2">
               <img
                 src={item?.avatar}
@@ -28,7 +28,7 @@ const PostUser = ({ listPost }) => {
         ))}
       </div>
     </div>
-  )
+  );
 };
 
 export default PostUser;

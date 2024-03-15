@@ -84,8 +84,8 @@ const Header = () => {
 
   console.log(username);
   return (
-    <>
-      <div className="text-white">
+    <div className=""> 
+      <div className="text-white " >
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
@@ -94,7 +94,7 @@ const Header = () => {
           >
             <img src={Logo} alt="Example" />
           </Typography>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 ">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
               {!isLogin ? (
@@ -198,7 +198,7 @@ const Header = () => {
           </div>
         </MobileNav>
       </div>
-    </>
+    </div>
   );
 };
 export default Header;

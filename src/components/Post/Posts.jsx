@@ -8,6 +8,7 @@ import axios from "axios";
 // import FormPost from "./FormPost";
 // import { Tooltip } from "@material-tailwind/react";
 import background from '../../images/bg3.jpg'
+import FormPost from "./FormPost";
 
 const posts = [
   {
@@ -89,8 +90,9 @@ function Posts() {
   return (
     <div className="" style={backgroundImageStyle}>
     <Header/>
-      <div className="grid grid-cols-3 ">
-        <div>
+    <div className="w-[1500px] mx-auto">
+      <div className="grid grid-cols-4 gap-[30px]">
+        <div className="col-span-1">
           <div className="flex flex-col fixed">
             <h1 className="text-white ml-[30px] mb-[30px] font-bold text-[25px]">GROUPS</h1>
             {group.map((groups) => {
@@ -102,15 +104,15 @@ function Posts() {
                       alt={groups?.GroupName}
                       className="w-[60px] h-[60px] rounded-full mb-[20px] border-2 border-gray-50"
                     />
-                    <p className="ml-[10px] w-[400px] text-white mt-[17px]">{groups.GroupName}</p>
+                    <p className="ml-[10px] text-white mt-[17px]">{groups.GroupName}</p>
                   </div>
                 </>
               )
             })}
           </div>
         </div>
-        <div>
-          <h1>Row 1</h1>
+        <div className="col-span-2 w-[600px]">
+          <FormPost/>
           <PostUser
             listPost={posts}
           />
@@ -144,9 +146,26 @@ function Posts() {
           </div>
         </div>
 
-        <div>
-          <h1>Row 2</h1>
+        <div className="col-span-1">
+        <div className="flex flex-col fixed">
+            <h1 className="text-white ml-[30px] mb-[30px] font-bold text-[25px]">Những người tương thích</h1>
+            {group.map((groups) => {
+              return (
+                <>
+                  <div className="rounded-lg cursor-pointer flex ml-[30px]">
+                    <img
+                      src={groups?.avatarLink}
+                      alt={groups?.GroupName}
+                      className="w-[60px] h-[60px] rounded-full mb-[20px] border-2 border-gray-50"
+                    />
+                    <p className="ml-[10px] w-[400px] text-white mt-[17px]">{groups.GroupName}</p>
+                  </div>
+                </>
+              )
+            })}
+          </div>
         </div>
+      </div>
       </div>
       <Footer/>
     </div>
