@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
-// import Footer from "../Footer/Footer";
+import Footer from "../Footer/Footer";
 import PostUser from "./PostUser";
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
-import FormPost from "./FormPost";
-import { Tooltip } from "@material-tailwind/react";
+// import FormPost from "./FormPost";
+// import { Tooltip } from "@material-tailwind/react";
 import background from '../../images/bg3.jpg'
 
 const posts = [
@@ -47,7 +47,7 @@ function Posts() {
     minHeight: 'screen',
   };
 
-  const [groups, setGroups] = useState([]);
+  const [group, setGroups] = useState([]);
 
   useEffect(() => {
     const fetchGroups = async () => {
@@ -56,7 +56,7 @@ function Posts() {
           "https://api.iudi.xyz/api/forum/group/all_group"
         );
         setGroups(response.data.data);
-        console.log('response',response);
+        console.log('response', response);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -64,7 +64,7 @@ function Posts() {
     fetchGroups();
   }, []);
 
-  console.log(groups);
+  console.log(group);
   // pagination
   const [active, setActive] = useState(1);
 
@@ -87,57 +87,68 @@ function Posts() {
   };
 
   return (
-    <div
-      style={backgroundImageStyle}
-    >
-      <Header />
-      <div className="container mx-auto px-4">
-        <h1 className="text-2xl text-white font-bold mb-4 mt-5">
-          Groups
-        </h1>
-        <div className="flex">
-          {groups.map((group, index) => (
-            <Tooltip key={index} content={group.GroupName}>
-              <div className="p-4 rounded-lg cursor-pointer">
-                <img
-                  src={group?.avatarLink}
-                  alt={group?.GroupName}
-                  className="w-16 h-16 rounded-full mx-auto mb-2"
-                />
-              </div>
-            </Tooltip>
-          ))}
-        </div>
-      </div>
-      <FormPost />
-      <PostUser listPost={posts} />
-      <div className="bd-white flex justify-center pb-5">
-        <div className="flex items-center gap-4">
-          <Button
-            variant="text"
-            className="flex items-center gap-2"
-            onClick={prev}
-            disabled={active === 1}
-          >
-            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />
-          </Button>
-          <div className="flex items-center gap-2">
-            <IconButton {...getItemProps(1)}>1</IconButton>
-            <IconButton {...getItemProps(2)}>2</IconButton>
-            <IconButton {...getItemProps(3)}>3</IconButton>
-            <IconButton {...getItemProps(4)}>4</IconButton>
-            <IconButton {...getItemProps(5)}>5</IconButton>
+    <div className="" style={backgroundImageStyle}>
+    <Header/>
+      <div className="grid grid-cols-3 ">
+        <div>
+          <div className="flex flex-col fixed">
+            <h1 className="text-white ml-[30px] mb-[30px] font-bold text-[25px]">GROUPS</h1>
+            {group.map((groups) => {
+              return (
+                <>
+                  <div className="rounded-lg cursor-pointer flex ml-[30px]">
+                    <img
+                      src={groups?.avatarLink}
+                      alt={groups?.GroupName}
+                      className="w-[60px] h-[60px] rounded-full mb-[20px] border-2 border-gray-50"
+                    />
+                    <p className="ml-[10px] w-[400px] text-white mt-[17px]">{groups.GroupName}</p>
+                  </div>
+                </>
+              )
+            })}
           </div>
-          <Button
-            variant="text"
-            className="flex items-center gap-2"
-            onClick={next}
-            disabled={active === 5}
-          >
-            <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
-          </Button>
+        </div>
+        <div>
+          <h1>Row 1</h1>
+          <PostUser
+            listPost={posts}
+          />
+
+          <div className="bd-white flex justify-center pb-5">
+            <div className="flex items-center gap-4">
+              <Button
+                variant="text"
+                className="flex items-center gap-2"
+                onClick={prev}
+                disabled={active === 1}
+              >
+                <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />
+              </Button>
+              <div className="flex items-center gap-2">
+                <IconButton {...getItemProps(1)}>1</IconButton>
+                <IconButton {...getItemProps(2)}>2</IconButton>
+                <IconButton {...getItemProps(3)}>3</IconButton>
+                <IconButton {...getItemProps(4)}>4</IconButton>
+                <IconButton {...getItemProps(5)}>5</IconButton>
+              </div>
+              <Button
+                variant="text"
+                className="flex items-center gap-2"
+                onClick={next}
+                disabled={active === 5}
+              >
+                <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h1>Row 2</h1>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
