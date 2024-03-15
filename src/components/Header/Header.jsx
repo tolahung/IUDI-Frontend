@@ -85,8 +85,8 @@ const Header = () => {
   console.log(username);
   return (
     <div className=""> 
-      <div className="text-white " >
-        <div className="flex items-center justify-between text-blue-gray-900">
+      <div className="text-white pb-[100px]" >
+        <div className="flex items-center justify-between text-blue-gray-900 fixed left-0 right-0">
           <Typography
             as="a"
             href="/"
@@ -171,7 +171,7 @@ const Header = () => {
           </div>
         </div>
 
-        <MobileNav open={openNav}>
+        {/* <MobileNav open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             {isLogin ? (
@@ -196,7 +196,7 @@ const Header = () => {
               </Button>
             )}
           </div>
-        </MobileNav>
+        </MobileNav> */}
       </div>
     </div>
   );

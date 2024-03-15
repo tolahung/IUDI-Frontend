@@ -101,7 +101,7 @@ function FormPost() {
                   <input
                   type="file"
                   id="imageupload"
-                  accept="image/"
+                  accept="image/*"
                   className="hidden"
                   onChange={handleImageChange}
                 />
@@ -109,6 +109,7 @@ function FormPost() {
               
                 <button
                   className="w-[80px] h-[35px] bg-green-500 rounded-[20px]"
+                  onClick={onHandelSubmit}
                 >
                   Đăng
                 </button>
