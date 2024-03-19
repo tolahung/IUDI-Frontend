@@ -91,8 +91,6 @@ const Header = () => {
       window.location.href = "/";
     }
   };
-
-  console.log(username);
   return (
     <div className=""> 
       <div className="text-white pb-[100px]" >

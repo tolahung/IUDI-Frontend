@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -9,7 +9,7 @@ import registerSchema from "../../schemas/register";
 import { joiResolver } from "@hookform/resolvers/joi";
 
 const RegisterForm = () => {
-
+  const [sta, setSta] = useState(true)
   const {
     register,
     handleSubmit,
@@ -19,28 +19,56 @@ const RegisterForm = () => {
   } = useForm({ resolver: joiResolver(registerSchema) });
 
   const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setValue(
-          'Latitude', latitude
-        );
-        setValue(
-          'Longitude', longitude
-        );
-        setValue(
-          'avatarLink', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9Zde21fi2AnY9_C17tqYi8DO25lRM_yAa7Q&usqp=CAU&fbclid=IwAR16g1ONptpUiKuDIt37LRxU3FTZck1cv9HDywe9VWxWSQBwcuGNfB7JUw4'
-        )
-        setValue('LastLoginIP', '1')
-      });
+    if (navigator.permissions) {
+      navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus)=>{
+        if (permissionStatus.state === 'granted') {
+          // Vị trí đã được cho phép
+            navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords;
+            setValue(
+              'Latitude', latitude
+            );
+            setValue(
+              'Longitude', longitude
+            );
+            setValue(
+              'avatarLink', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9Zde21fi2AnY9_C17tqYi8DO25lRM_yAa7Q&usqp=CAU&fbclid=IwAR16g1ONptpUiKuDIt37LRxU3FTZck1cv9HDywe9VWxWSQBwcuGNfB7JUw4'
+            )
+            setValue('LastLoginIP', '1')
+          });
+          setSta(true)
+        } else if (permissionStatus.state === 'prompt') {
+          // Hiển thị cửa sổ xác nhận yêu cầu vị trí
+          navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords;
+            setValue(
+              'Latitude', latitude
+            );
+            setValue(
+              'Longitude', longitude
+            );
+            setValue(
+              'avatarLink', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9Zde21fi2AnY9_C17tqYi8DO25lRM_yAa7Q&usqp=CAU&fbclid=IwAR16g1ONptpUiKuDIt37LRxU3FTZck1cv9HDywe9VWxWSQBwcuGNfB7JUw4'
+            )
+            setValue('LastLoginIP', '1')
+            setSta(true)
+          }, alert('Vui lòng mở vị trí trước khi tiếp tục!')&&setSta(false));
+        } else if (permissionStatus.state === 'denied') {
+          // Vị trí bị từ chối
+          alert("Vui lòng mở vị trí trước khi tiếp tục!");
+          setSta(false)
+        }
+      })
 
     } else {
       alert("Trình duyệt không hỗ trợ geolocation hoặc trình duyệt chặn truy cập vị trí, vui lòng kiểm tra!.");
+      setSta(false)
     }
   };
 
   useEffect(() => {
     getLocation();
+    window.addEventListener('GeolocationPermissionChangeEvent', getLocation)
   }, []);
 
   const handleSubmitForm = async (data) => {
@@ -234,8 +262,9 @@ const RegisterForm = () => {
                 background:
                   "linear-gradient(90deg, rgba(29,120,36,1) 0%, rgba(44,186,55,0.8127626050420168) 90%, rgba(0,255,68,1) 100%)",
               }}
-              className="w-full py-2 px-4 font-bold rounded focus:outline-none text-white"
+              className={`w-full  py-2 px-4 ${sta?'':'bg-black'} font-bold rounded focus:outline-none text-white`}
               type="submit"
+              disabled={!sta}
             >
               Register
             </button>
