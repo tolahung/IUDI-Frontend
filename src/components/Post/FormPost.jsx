@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaUpload } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
-function FormPost() {
+function FormPost({fetchContent}) {
   const [isLogin, setIsLogin] = useState(false);
   const [userName, setUserName] = useState(null);
   const [profileData, setProfileData] = useState(null);
@@ -17,7 +19,7 @@ function FormPost() {
       setIsLogin(true);
     }
   }, []);
-
+  const {groupId} = useParams()
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -61,16 +63,30 @@ function FormPost() {
   const onHandelSubmit = async () => {
     const res = await uploadImage(imagePost)
     const dataForm = {
-      GroupID: "1",
+      GroupID: groupId,
       Title: "",
       Content: data,
       PostLatitude: "40",
       PostLongitude: "50",
       PhotoURL: [res]
     }
-    console.log(dataForm)
+    try{
     const respon = await axios.post(`https://api.iudi.xyz/api/forum/add_post/${profileData.Users[0].UserID}`, dataForm)
-    console.log(respon)
+    if (respon.status == 200) {
+      toast.success("Successfull!")
+      fetchContent()
+      setImagePost(null);
+      setData('')
+    }
+    else {
+      toast.warning("An error occur!!")
+      console.log(res)
+
+    }
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
   return (
     <>
@@ -86,9 +102,11 @@ function FormPost() {
                 />
                 <input
                   type="text"
+                  value={data}
                   placeholder="Bạn đang nghĩ gi ?"
                   className="p-[10px] bg-[#292929] text-white w-full"
                   onChange={handleTextChange}
+                  
                 />
               </div>
 

@@ -9,6 +9,7 @@ import axios from "axios";
 // import { Tooltip } from "@material-tailwind/react";
 import background from '../../images/bg3.jpg'
 import FormPost from "./FormPost";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Posts() {
   const backgroundImageStyle = {
@@ -21,8 +22,7 @@ function Posts() {
 
   const [group, setGroups] = useState([]);
   const [grcontent, setGrcontent] = useState([]);
-  const [titlegr, settitlegr] = useState('1');
-
+  const {groupId} = useParams()
   //all group
   useEffect(() => {
     const fetchGroups = async () => {
@@ -31,26 +31,25 @@ function Posts() {
           "https://api.iudi.xyz/api/forum/group/all_group"
         );
         setGroups(response.data.data);
-
+          
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchGroups();
   }, []);
-
+  const fetchcontent = async () => {
+    try {
+      const res = await axios.get(`https://api.iudi.xyz/api/forum/group/${groupId}/1/1000`);
+      setGrcontent(res.data.list_posts.reverse());
+    } catch (error) {
+      console.log(error);
+    }
+  }
   //each group post
   useEffect(() => {
-    const fetchcontent = async () => {
-      try {
-        const res = await axios.get(`https://api.iudi.xyz/api/forum/group/${titlegr}/1/1000`);
-        setGrcontent(res.data.list_posts);
-      } catch (error) {
-        console.log(error);
-      }
-    }
     fetchcontent();
-  }, [titlegr])
+  }, [groupId])
   // pagination
   const [active, setActive] = useState(1);
 
@@ -71,10 +70,7 @@ function Posts() {
 
     setActive(active - 1);
   };
-
-  console.log('all group',group);
-  console.log('id group',titlegr);
-  console.log('grcontent',grcontent);
+  const navi = useNavigate()
   return (
     <div className="" style={backgroundImageStyle}>
       <Header />
@@ -90,7 +86,7 @@ function Posts() {
                     <div 
                     key={groups.GroupID} 
                     className=" flex rounded-lg cursor-pointer p-[10px] ml-[30px] hover:bg-green-400" 
-                    onClick={()=>{settitlegr(groups.GroupID)}}
+                    onClick={()=>{navi(`/posts/${groups.GroupID}`)}}
                     style={grcontent === groups.GroupID ? {backgroundColor: 'green'} : {}}
                     >
                       <img
@@ -108,7 +104,7 @@ function Posts() {
 
           {/* Phần 2 */}
           <div className="col-span-2 w-[600px]">
-            <FormPost />
+            <FormPost fetchContent={fetchcontent}/>
             <PostUser
               listPost={grcontent}
             />

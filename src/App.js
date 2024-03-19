@@ -19,7 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/profile/:username" element={<Profile />} />
-        <Route path="/posts" element={<Posts />} />
+        <Route path="/posts/:groupId" element={<Posts />} />
         <Route path="/personal" element={<Personal />} />
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/finding" element={<Finding />} />
