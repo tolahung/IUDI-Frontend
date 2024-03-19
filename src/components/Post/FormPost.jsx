@@ -108,7 +108,7 @@ function FormPost() {
                 </label>
               
                 <button
-                  className="w-[80px] h-[35px] bg-green-500 rounded-[20px]"
+                  className="w-[80px] h-[35px] text-white bg-green-500 rounded-[20px]"
                   onClick={onHandelSubmit}
                 >
                   Đăng

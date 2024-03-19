@@ -30,7 +30,7 @@ const Header = () => {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="text-white"
         className="p-1 font-normal"
       >
         <a href="/" className="flex items-center">
@@ -40,7 +40,7 @@ const Header = () => {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="text-white"
         className="p-1 font-normal"
       >
         <a href="/finding" className="flex items-center">
@@ -50,7 +50,7 @@ const Header = () => {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="text-white"
         className="p-1 font-normal"
       >
         <a href="posts" className="flex items-center">
@@ -60,7 +60,7 @@ const Header = () => {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="text-white"
         className="p-1 font-normal"
       >
         <a href={`profile/${username}`} className="flex items-center">
@@ -96,7 +96,8 @@ const Header = () => {
   return (
     <div className=""> 
       <div className="text-white pb-[100px]" >
-        <div className="flex items-center justify-between text-blue-gray-900 fixed left-0 right-0">
+        <div
+        className="flex items-center justify-between text-white fixed left-0 right-0 z-10"> 
           <Typography
             as="a"
             href="/"

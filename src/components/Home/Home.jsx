@@ -8,9 +8,9 @@ import background from "../../images/background.jpg";
 function Home() {
   const backgroundImageStyle = {
     backgroundImage: `url(${background})`,
-    // backgroundSize: 'cover',
+    backgroundSize: 'cover',
     // backgroundPosition: 'center',
-    // backgroundRepeat: 'no-repeat',
+    backgroundRepeat: 'no-repeat',
     // minHeight: 'screen',
   };
 

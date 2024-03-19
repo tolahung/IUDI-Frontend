@@ -10,35 +10,6 @@ import axios from "axios";
 import background from '../../images/bg3.jpg'
 import FormPost from "./FormPost";
 
-const posts = [
-  {
-    avatar:
-      "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-    username: "huukien02",
-    time: "19/5/2024 6:50 am",
-    status: "Hello",
-    image:
-      "https://thanhnien.mediacdn.vn/Uploaded/dotuan/2022_09_23/2-2190.jpg",
-  },
-  {
-    avatar:
-      "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-    username: "huukien02",
-    time: "20/5/2022 18:10 pm",
-    status: "Hello body",
-    image:
-      "https://thanhnien.mediacdn.vn/Uploaded/dotuan/2022_09_23/2-2190.jpg",
-  },
-  {
-    avatar:
-      "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-    username: "huukien02",
-    time: "1/5/2023 16 pm",
-    status: "Hi Guy",
-    image:
-      "https://thanhnien.mediacdn.vn/Uploaded/dotuan/2022_09_23/2-2190.jpg",
-  },
-];
 function Posts() {
   const backgroundImageStyle = {
     backgroundImage: `url(${background})`,
@@ -108,7 +79,7 @@ function Posts() {
     <div className="" style={backgroundImageStyle}>
       <Header />
       <div className="w-[1500px] mx-auto">
-        <div className="grid grid-cols-4 gap-[30px]">
+        <div className="grid grid-cols-4 gap-[30px] mt-[30px]">
           {/* Phần 1 */}
           <div className="col-span-1">
             <div className="flex flex-col fixed">
@@ -141,26 +112,26 @@ function Posts() {
             <PostUser
               listPost={grcontent}
             />
-            <div className="bd-white flex justify-center pb-5">
+            <div className="bd-white flex justify-center pb-5 text-white">
               <div className="flex items-center gap-4">
                 <Button
                   variant="text"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 text-white"
                   onClick={prev}
                   disabled={active === 1}
                 >
                   <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />
                 </Button>
                 <div className="flex items-center gap-2">
-                  <IconButton {...getItemProps(1)}>1</IconButton>
-                  <IconButton {...getItemProps(2)}>2</IconButton>
-                  <IconButton {...getItemProps(3)}>3</IconButton>
-                  <IconButton {...getItemProps(4)}>4</IconButton>
-                  <IconButton {...getItemProps(5)}>5</IconButton>
+                  <IconButton {...getItemProps(1)} className="text-white">1</IconButton>
+                  <IconButton {...getItemProps(2)} className="text-white">2</IconButton>
+                  <IconButton {...getItemProps(3)} className="text-white">3</IconButton>
+                  <IconButton {...getItemProps(4)} className="text-white">4</IconButton>
+                  <IconButton {...getItemProps(5)} className="text-white">5</IconButton>
                 </div>
                 <Button
                   variant="text"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 text-white"
                   onClick={next}
                   disabled={active === 5}
                 >

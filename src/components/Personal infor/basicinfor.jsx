@@ -143,7 +143,7 @@ function Personal() {
                     </button>
                 </div> 
             </div>
-            <div className="border-t-2 border-white">
+            <div className="z-0">
             <div class="bg-[#252525] p-[20px] mt-[60px] ml-[900px] px-[50px] mx-auto w-[490px] border-2 border-green-500 rounded-lg shadow-lg">
                 <div className="my-[15px] flex flex-col items-center ">
                     <h1 className="text-3xl font-semibold text-green-600">Thông tin cá nhân</h1>

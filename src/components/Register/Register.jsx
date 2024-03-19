@@ -73,7 +73,7 @@ const RegisterForm = () => {
       <div className="max-w-md w-full mx-auto mt-10">
         <form
           onSubmit={handleSubmit(handleSubmitForm)}
-          className="bg-zinc-900 shadow-md rounded px-8 pt-3 pb-5 mb-2"
+          className="rounded-[20px] px-8 pt-3 pb-5 mb-2 border-2 border-[#49a849]"
         >
           <h3
             className="text-3xl font-extrabold text-center mb-2 mt-2 "
@@ -85,7 +85,7 @@ const RegisterForm = () => {
           </h3>
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-whitetext-sm font-bold mb-2"
               htmlFor="username"
               style={{
                 color: "rgba(44,186,55,0.8127626050420168)",
@@ -94,7 +94,7 @@ const RegisterForm = () => {
               Username
             </label>
             <input
-              className="shadow appearance-none border dark:text-white rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border dark:text-white rounded w-full py-2 px-3 text-whiteleading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="text"
               placeholder="Username"
@@ -107,7 +107,7 @@ const RegisterForm = () => {
           </div>
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-white text-sm font-bold mb-2"
               htmlFor="fullName"
               style={{
                 color: "rgba(44,186,55,0.8127626050420168)",
@@ -116,7 +116,7 @@ const RegisterForm = () => {
               Full Name
             </label>
             <input
-              className="shadow appearance-none border rounded dark:text-white w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded dark:text-white w-full py-2 px-3 text-whiteleading-tight focus:outline-none focus:shadow-outline"
               id="fullName"
               type="text"
               placeholder="Full Name"
@@ -129,7 +129,7 @@ const RegisterForm = () => {
           </div>
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-whitetext-sm font-bold mb-2"
               htmlFor="email"
               style={{
                 color: "rgba(44,186,55,0.8127626050420168)",
@@ -138,7 +138,7 @@ const RegisterForm = () => {
               Email
             </label>
             <input
-              className="shadow appearance-none border rounded w-full dark:text-white py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full dark:text-white py-2 px-3 text-whiteleading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
               placeholder="Email"
@@ -149,21 +149,21 @@ const RegisterForm = () => {
               <p className="text-red-500 text-sm font-bold mt-2"> {errors.Email.message} </p>
             )}
             <input
-              className="shadow appearance-none border rounded dark:text-white w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
+              className="shadow appearance-none border rounded dark:text-white w-full py-2 px-3 text-whiteleading-tight focus:outline-none focus:shadow-outline hidden"
               id="avatarLink"
               type="text"
               name="avatarLink"
               {...register("avatarLink")}
             />
             <input
-              className="shadow appearance-none border rounded dark:text-white w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline hidden"
+              className="shadow appearance-none border rounded dark:text-white w-full py-2 px-3 text-whiteleading-tight focus:outline-none focus:shadow-outline hidden"
               id="LastLoginIP"
               type="text"
               name="LastLoginIP"
               {...register("LastLoginIP")}
             />
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2 mt-3"
+                  className="block text-whitetext-sm font-bold mb-2 mt-3"
                   htmlFor="email"
                   style={{
                     color: "rgba(44,186,55,0.8127626050420168)",
@@ -186,7 +186,7 @@ const RegisterForm = () => {
           </div>
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-whitetext-sm font-bold mb-2"
               htmlFor="password"
               style={{
                 color: "rgba(44,186,55,0.8127626050420168)",
@@ -195,7 +195,7 @@ const RegisterForm = () => {
               Password
             </label>
             <input
-              className="shadow appearance-none border rounded w-full dark:text-white py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full dark:text-white py-2 px-3 text-whiteleading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="Password"
@@ -208,7 +208,7 @@ const RegisterForm = () => {
           )}
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-whitetext-sm font-bold mb-2"
               htmlFor="password"
               style={{
                 color: "rgba(44,186,55,0.8127626050420168)",
@@ -217,7 +217,7 @@ const RegisterForm = () => {
               Confirm Password
             </label>
             <input
-              className="shadow appearance-none border rounded w-full dark:text-white py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full dark:text-white py-2 px-3 text-whiteleading-tight focus:outline-none focus:shadow-outline"
               id="cf_password"
               type="password"
               placeholder="Confirm Password"
