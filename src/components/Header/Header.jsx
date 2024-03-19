@@ -57,7 +57,9 @@ const Header = () => {
           Post
         </a>
       </Typography>
-      <Typography
+      {
+        isLogin ? (
+          <Typography
         as="li"
         variant="small"
         color="text-white"
@@ -67,6 +69,8 @@ const Header = () => {
           Profile
         </a>
       </Typography>
+        ):('')
+      }
 
       {isLogin ? (
         <Typography>

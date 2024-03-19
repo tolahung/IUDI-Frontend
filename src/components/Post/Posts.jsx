@@ -10,6 +10,7 @@ import axios from "axios";
 import background from '../../images/bg3.jpg'
 import FormPost from "./FormPost";
 import { useNavigate, useParams } from "react-router-dom";
+import Thumbgroup from "./Thumbgroup";
 
 function Posts() {
   const backgroundImageStyle = {
@@ -22,7 +23,7 @@ function Posts() {
 
   const [group, setGroups] = useState([]);
   const [grcontent, setGrcontent] = useState([]);
-  const {groupId} = useParams()
+  const { groupId } = useParams()
   //all group
   useEffect(() => {
     const fetchGroups = async () => {
@@ -31,7 +32,7 @@ function Posts() {
           "https://api.iudi.xyz/api/forum/group/all_group"
         );
         setGroups(response.data.data);
-          
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -71,8 +72,14 @@ function Posts() {
     setActive(active - 1);
   };
   const navi = useNavigate()
+
+  //Lấy ra index của group
+  let index = group.findIndex((user) => {
+    return user.GroupID == groupId
+  })
+
   return (
-    <div className="" style={backgroundImageStyle}>
+    <div className="bg-[#092909]">
       <Header />
       <div className="w-[1500px] mx-auto">
         <div className="grid grid-cols-4 gap-[30px] mt-[30px]">
@@ -83,18 +90,20 @@ function Posts() {
               {group.map((groups) => {
                 return (
                   <>
-                    <div 
-                    key={groups.GroupID} 
-                    className=" flex rounded-lg cursor-pointer p-[10px] ml-[30px] hover:bg-green-400" 
-                    onClick={()=>{navi(`/posts/${groups.GroupID}`)}}
-                    style={grcontent === groups.GroupID ? {backgroundColor: 'green'} : {}}
+                    <div
+                      key={groups.GroupID}
+                      className=" flex rounded-lg cursor-pointer p-[10px] ml-[30px] hover:bg-green-400"
+                      onClick={() => { navi(`/posts/${groups.GroupID}`) }}
                     >
                       <img
                         src={groups?.avatarLink}
                         alt={groups?.GroupName}
                         className="w-[60px] h-[60px] rounded-full border-2 border-gray-50"
                       />
-                      <p className="ml-[10px] text-white mt-[17px]">{groups.GroupName}</p>
+                     <div className="flex flex-col">
+                     <p className="ml-[10px] text-white mt-[5px] font-bold">{groups.GroupName}</p>
+                      <p className="ml-[10px] text-gray-700">Thành viên: {groups.GroupID}</p>
+                     </div>
                     </div>
                   </>
                 )
@@ -103,8 +112,11 @@ function Posts() {
           </div>
 
           {/* Phần 2 */}
-          <div className="col-span-2 w-[600px]">
-            <FormPost fetchContent={fetchcontent}/>
+          <div className="col-span-2 w-[650px]">
+            <Thumbgroup
+              thumbpost={group[index]}
+            />
+            <FormPost fetchContent={fetchcontent} />
             <PostUser
               listPost={grcontent}
             />
@@ -138,8 +150,8 @@ function Posts() {
           </div>
 
           {/* Phần 3 */}
-          <div className="col-span-1">
-            <div className="flex flex-col fixed">
+          <div className="col-span-1 pt-[480px]">
+            <div className="flex flex-col sticky top-[125px]">
               <h1 className="text-white ml-[30px] mb-[30px] font-bold text-[25px]">Những người tương thích</h1>
               {group.map((groups) => {
                 return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaUpload } from "react-icons/fa";
+// import { FaUpload } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
