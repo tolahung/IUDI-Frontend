@@ -53,7 +53,7 @@ const Header = () => {
         color="text-white"
         className="p-1 font-normal"
       >
-        <a href="posts" className="flex items-center">
+        <a href="posts/1" className="flex items-center">
           Post
         </a>
       </Typography>
