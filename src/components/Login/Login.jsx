@@ -26,17 +26,18 @@ function LoginForm() {
     setValue,
     formState: { errors, isValid },
   } = useForm({ resolver: joiResolver(loginSchema) })
-
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get("http://ip-api.com/json/");
-        setValue('Latitude', response.data.lat)
-        setValue('Longitude', response.data.lon)
-        setValue('LastLoginIP', response.data.query)
-      } catch (error) {
+      fetch('http://ip-api.com/json')
+      .then((response)=>response.json())
+      .then((data)=>{
+        setValue('Latitude', data.lat)
+        setValue('Longitude', data.lon)
+        setValue('LastLoginIP', data.query)
+      }).catch ((error)=> {
         console.error("Error fetching data:", error);
-      }
+      })
+      
     };
 
     fetchData();
