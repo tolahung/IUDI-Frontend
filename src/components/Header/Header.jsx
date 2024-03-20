@@ -54,7 +54,7 @@ const Header = () => {
         className="p-1 font-normal"
       >
         <a href="posts/1" className="flex items-center">
-          Post
+          Group
         </a>
       </Typography>
       {

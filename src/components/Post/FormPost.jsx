@@ -73,10 +73,11 @@ function FormPost({fetchContent}) {
     try{
     const respon = await axios.post(`https://api.iudi.xyz/api/forum/add_post/${profileData.Users[0].UserID}`, dataForm)
     if (respon.status === 200) {
-      toast.success("Successfull!")
-      fetchContent()
+      toast.success("Successfull!");
+      fetchContent();
       setImagePost(null);
-      setData('')
+      setData('');
+      setTimeout(()=>{ window.location.reload();}, 1000);
     }
     else {
       toast.warning("An error occur!!")
@@ -126,7 +127,7 @@ function FormPost({fetchContent}) {
               
                 <button
                   className="w-[80px] h-[35px] text-white bg-green-500 rounded-[20px]"
-                  onClick={onHandelSubmit}
+                  onDoubleClick={onHandelSubmit}
                 >
                   Đăng
                 </button>
