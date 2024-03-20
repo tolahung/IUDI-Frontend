@@ -4,9 +4,9 @@ import React from 'react';
 const Thumbgroup = ({ thumbpost}) => {
     return (
         <div>
-            <div className='w-[180%] h-[450px] bg-green-800 text-white rounded-[6px]'>
+            <div className='w-[180%] h-[450px] bg-green-800 text-white '>
             <div key={thumbpost?.GroupID}>
-                            <div className='thumbnail h-[370px] rounded-[6px] overflow-hidden '>
+                            <div className='thumbnail h-[370px] overflow-hidden '>
                                 <img className='w-[100%] h-[100%]' src={thumbpost?.avatarLink} alt='thumb' />
                             </div>
 
