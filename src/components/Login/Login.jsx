@@ -28,7 +28,7 @@ function LoginForm() {
   } = useForm({ resolver: joiResolver(loginSchema) })
   useEffect(() => {
     const fetchData = async () => {
-      fetch('http://ip-api.com/json')
+      fetch('http://ip-api.com/json/iudi.xyz')
       .then((response)=>response.json())
       .then((data)=>{
         setValue('Latitude', data.lat)
