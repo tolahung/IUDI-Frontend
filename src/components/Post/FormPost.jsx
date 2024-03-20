@@ -72,7 +72,7 @@ function FormPost({fetchContent}) {
     }
     try{
     const respon = await axios.post(`https://api.iudi.xyz/api/forum/add_post/${profileData.Users[0].UserID}`, dataForm)
-    if (respon.status == 200) {
+    if (respon.status === 200) {
       toast.success("Successfull!")
       fetchContent()
       setImagePost(null);
@@ -81,7 +81,6 @@ function FormPost({fetchContent}) {
     else {
       toast.warning("An error occur!!")
       console.log(res)
-
     }
     }
     catch (error) {

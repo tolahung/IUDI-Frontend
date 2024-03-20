@@ -42,7 +42,7 @@ function Posts() {
   const fetchcontent = async () => {
     try {
       const res = await axios.get(`https://api.iudi.xyz/api/forum/group/${groupId}/1/1000`);
-      setGrcontent(res.data.list_posts.reverse());
+      setGrcontent(res.data.list_posts.reverse()); 
     } catch (error) {
       console.log(error);
     }

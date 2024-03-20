@@ -83,6 +83,7 @@ const RegisterForm = () => {
         );
         (response.data.status === 200) && toast.success("Register successfully!") && reset();
         setTimeout(navigate('/login', 5000))
+        setTimeout(()=>{ window.location.reload();}, 3000)
       } catch (error) {
         console.error("Error registering:", error);
         toast.error(`Register failed! ${error.response.data.message}`, { closeOnClick: true });
