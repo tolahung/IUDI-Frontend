@@ -190,9 +190,9 @@ function Posts() {
           </div>
 
           {/* Phần 3 */}
-          <div className="col-span-1 pt-[480px]">
+          <div className="col-span-1 pt-[510px]">
             <div className="flex flex-col sticky top-[125px]">
-              <h1 className="text-white mb-[30px] font-bold text-[25px]">Ảnh nhóm</h1>
+              <h1 className="text-white mb-[10px] font-bold text-[25px]">Ảnh nhóm</h1>
               <ListImg 
                 listImg={grcontent}
               />

@@ -4,10 +4,10 @@ import React from 'react';
 const Thumbgroup = ({ thumbpost}) => {
     return (
         <div>
-            <div className='w-[180%] h-[450px] bg-green-800 text-white '>
+            <div className='w-[180%] h-[470px] shadow-md p-4  text-white border-2 border-[#4caf50]'>
             <div key={thumbpost?.GroupID}>
                             <div className='thumbnail h-[370px] overflow-hidden '>
-                                <img className='w-[100%] h-[100%]' src={thumbpost?.avatarLink} alt='thumb' />
+                                <img className='w-[100%] h-[100%] rounded-[6px]' src={thumbpost?.avatarLink} alt='thumb' />
                             </div>
 
                             <div className='content w-[100%] h-[30%] flex justify-between items-center p-[15px]'>
