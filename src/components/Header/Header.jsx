@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Navbar,
   MobileNav,
   Typography,
   Button,
@@ -18,7 +17,7 @@ const Header = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
-
+  const username = localStorage.getItem("UserNameIuDi")
   useEffect(() => {
     const storedData = localStorage.getItem("IuDiToken");
     if (storedData) {
@@ -31,7 +30,7 @@ const Header = () => {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="text-white"
         className="p-1 font-normal"
       >
         <a href="/" className="flex items-center">
@@ -41,33 +40,41 @@ const Header = () => {
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="text-white"
         className="p-1 font-normal"
       >
-        <a href="posts" className="flex items-center">
+        <a href="/finding" className="flex items-center">
+          Finding
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="text-white"
+        className="p-1 font-normal"
+      >
+        <a href="posts/1" className="flex items-center">
           Post
         </a>
       </Typography>
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="text-white"
         className="p-1 font-normal"
       >
-        <a href="profile" className="flex items-center">
+        <a href={`profile/${username}`} className="flex items-center">
           Profile
         </a>
       </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a href="forgot-password" className="flex items-center">
-          Forgot Password
-        </a>
-      </Typography>
+
+      {isLogin ? (
+        <Typography>
+          <p>Chào mừng {username}</p>
+        </Typography>
+      ) : ('')}
+
+
     </ul>
   );
 
@@ -79,17 +86,16 @@ const Header = () => {
   };
   const handleLogout = () => {
     // eslint-disable-next-line no-restricted-globals
-    if (confirm("Bạn chắc khum?"))
-    {
+    if (confirm("Are you sure ? ")) {
       localStorage.removeItem("IuDiToken");
       window.location.href = "/";
     }
   };
-
   return (
-    <>
-      <div className="text-white">
-        <div className="flex items-center justify-between text-blue-gray-900">
+    <div className=""> 
+      <div className="text-white pb-[100px]" >
+        <div
+        className="flex items-center justify-between text-white fixed left-0 right-0 z-10"> 
           <Typography
             as="a"
             href="/"
@@ -97,14 +103,14 @@ const Header = () => {
           >
             <img src={Logo} alt="Example" />
           </Typography>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 ">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
               {!isLogin ? (
                 <Button
                   variant="text-white"
                   size="sm"
-                  className="hidden lg:inline-block"
+                  className="hidden lg:inline-block mr-4"
                   onClick={handleLogin}
                 >
                   <span>Log In</span>
@@ -114,21 +120,25 @@ const Header = () => {
                 <Button
                   variant="text-white"
                   size="sm"
-                  className="hidden lg:inline-block"
+                  className="hidden lg:inline-block mr-4"
                   onClick={handleLogout}
                 >
                   <span>Log Out</span>
                 </Button>
               )}
 
-              <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block"
-                onClick={handleRegister}
-              >
-                <span>Sign in</span>
-              </Button>
+              {
+                isLogin ? ('') : (
+                  <Button
+                    variant="gradient"
+                    size="sm"
+                    className="hidden lg:inline-block mr-4"
+                    onClick={handleRegister}
+                  >
+                    <span>Sign in</span>
+                  </Button>
+                )
+              }
             </div>
             <IconButton
               variant="text"
@@ -170,7 +180,7 @@ const Header = () => {
           </div>
         </div>
 
-        <MobileNav open={openNav}>
+        {/* <MobileNav open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             {isLogin ? (
@@ -194,20 +204,10 @@ const Header = () => {
                 <span>Log In</span>
               </Button>
             )}
-
-            <Button
-              fullWidth
-              variant="gradient"
-              size="sm"
-              className=""
-              onClick={handleRegister}
-            >
-              <span>Sign in</span>
-            </Button>
           </div>
-        </MobileNav>
+        </MobileNav> */}
       </div>
-    </>
+    </div>
   );
 };
 export default Header;

@@ -3,20 +3,20 @@ import { Typography } from "@material-tailwind/react";
 const currentYear = new Date().getFullYear();
 const Footer = () => {
   return (
-    <div className="text-white fixed bottom-0 w-full">
+    <div className="text-white w-full mt-11">
       <div className="mx-auto w-full max-w-7xl px-8">
         <div className="w-full justify-center py-4 ">
           <div>
             <Typography
               variant="small"
-              className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0"
+              className="mb-4 text-center font-normal text-white md:mb-0"
             >
               &copy; {currentYear}{" "}
               <a href="https://material-tailwind.com/">Company AI</a>. All
               Rights Reserved.
             </Typography>
           </div>
-          <div className="flex justify-center gap-4 text-blue-gray-900 mt-5">
+          <div className="flex justify-center gap-4 text-white mt-5">
             <Typography
               as="a"
               href="#"

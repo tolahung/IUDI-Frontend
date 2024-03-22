@@ -4,6 +4,7 @@ const registerSchema = Joi.object({
     Username: Joi.string().required(),
     FullName: Joi.string().required(),
     Email: Joi.string().required(),
+    Gender: Joi.string().required(),
     Password: Joi.string().min(6).max(32).required().messages({
         'string.min': 'Password can\'t be less than 6 letters!',
         'string.max': 'Password can\'t be more than 32 letters!',
@@ -23,6 +24,7 @@ const registerSchema = Joi.object({
     Cf_Password: Joi.valid(Joi.ref('Password')).messages({
         'any.only':'Password no match!'
     })
+
 })
 
 export default registerSchema

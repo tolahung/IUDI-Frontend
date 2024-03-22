@@ -6,6 +6,9 @@ import Register from './components/Register/Register';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import Profile from './components/Profile/Profile';
 import Posts from './components/Post/Posts';
+import Personal from './components/Personal infor/basicinfor';
+import EditProfile from './components/EditProfile/EditProfile';
+import Finding from './components/Finding/Finding';
 
 function App() {
   return (
@@ -15,8 +18,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/posts" element={<Posts />} />
+        <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/posts/:groupId" element={<Posts />} />
+        <Route path="/personal" element={<Personal />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
+        <Route path="/finding" element={<Finding />} />
       </Routes>
     </Router>
   );

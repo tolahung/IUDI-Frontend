@@ -11,15 +11,16 @@ function Home() {
     backgroundSize: 'cover',
     // backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    minHeight: '100vh',
+    // minHeight: 'screen',
   };
 
   
   return (
-      <div style={backgroundImageStyle}>
+      <div className="w-full h-screen flex flex-col justify-between" style={backgroundImageStyle}>
         <Header />
         <LayoutHome/>
-        <Footer />
+        <Footer 
+         />
       </div>
   );
 }
