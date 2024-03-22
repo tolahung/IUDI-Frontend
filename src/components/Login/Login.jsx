@@ -28,18 +28,18 @@ function LoginForm() {
   } = useForm({ resolver: joiResolver(loginSchema) })
   useEffect(() => {
     const fetchData = async () => {
-      fetch('http://ip-api.com/json/iudi.xyz')
+      fetch('http://www.geoplugin.net/json.gp?ip')
       .then((response)=>response.json())
       .then((data)=>{
-        setValue('Latitude', data.lat)
-        setValue('Longitude', data.lon)
-        setValue('LastLoginIP', data.query)
+        console.log(data)
+        setValue('Latitude', data.geoplugin_latitude)
+        setValue('Longitude', data.geoplugin_longitude)
+        setValue('LastLoginIP', data.geoplugin_request)
       }).catch ((error)=> {
         console.error("Error fetching data:", error);
       })
       
     };
-
     fetchData();
   }, []);
 
