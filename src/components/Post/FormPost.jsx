@@ -126,7 +126,7 @@ function FormPost({fetchContent}) {
                 </label>
               
                 <button
-                  className="w-[80px] h-[35px] text-white bg-green-500 rounded-[20px]"
+                  className="w-[80px] h-[35px] text-white bg-green-500 rounded-[20px] hover:bg-[#688868]"
                   onDoubleClick={onHandelSubmit}
                 >
                   Đăng
