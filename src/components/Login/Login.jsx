@@ -67,6 +67,7 @@ function LoginForm() {
           theme: "light",
         });
         setTimeout(navigate('/personal', 5000))
+        setTimeout(()=>{ window.location.reload();}, 2000)
       } catch (error) {
         console.error("Error registering:", error);
         toast.error(`Register failed! ${error.response.data.message}`, { closeOnClick: true });

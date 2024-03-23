@@ -54,10 +54,12 @@ const Header = () => {
         className="p-1 font-normal"
       >
         <a href="posts/1" className="flex items-center">
-          Post
+          Group
         </a>
       </Typography>
-      <Typography
+      {
+        isLogin ? (
+          <Typography
         as="li"
         variant="small"
         color="text-white"
@@ -67,14 +69,14 @@ const Header = () => {
           Profile
         </a>
       </Typography>
+        ):('')
+      }
 
       {isLogin ? (
         <Typography>
           <p>Chào mừng {username}</p>
         </Typography>
       ) : ('')}
-
-
     </ul>
   );
 
@@ -91,11 +93,25 @@ const Header = () => {
       window.location.href = "/";
     }
   };
+
+  // Xử lý scroll trang header
+  const [color, setColor] = useState(false)
+  function changeColor(){
+    if(window.scrollY >= 50){
+      setColor(true)
+    }else{
+      setColor(false)
+    }
+  }
+
+  window.addEventListener('scroll', changeColor);
   return (
     <div className=""> 
-      <div className="text-white pb-[100px]" >
-        <div
-        className="flex items-center justify-between text-white fixed left-0 right-0 z-10"> 
+      <div className="text-white pb-[100px] " >           
+      <div
+        className="flex items-center justify-between transition ease-in-out delay-150   text-white fixed left-0 right-0 z-10"
+        style={color ? {backgroundColor: '#0f7852'} : {}}  
+      > 
           <Typography
             as="a"
             href="/"

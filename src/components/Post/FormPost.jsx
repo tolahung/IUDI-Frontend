@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaUpload } from "react-icons/fa";
+// import { FaUpload } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
@@ -72,16 +72,16 @@ function FormPost({fetchContent}) {
     }
     try{
     const respon = await axios.post(`https://api.iudi.xyz/api/forum/add_post/${profileData.Users[0].UserID}`, dataForm)
-    if (respon.status == 200) {
-      toast.success("Successfull!")
-      fetchContent()
+    if (respon.status === 200) {
+      toast.success("Successfull!");
+      fetchContent();
       setImagePost(null);
-      setData('')
+      setData('');
+      setTimeout(()=>{ window.location.reload();}, 1000);
     }
     else {
       toast.warning("An error occur!!")
       console.log(res)
-
     }
     }
     catch (error) {
@@ -126,8 +126,8 @@ function FormPost({fetchContent}) {
                 </label>
               
                 <button
-                  className="w-[80px] h-[35px] text-white bg-green-500 rounded-[20px]"
-                  onClick={onHandelSubmit}
+                  className="w-[80px] h-[35px] text-white bg-green-500 rounded-[20px] hover:bg-[#688868]"
+                  onDoubleClick={onHandelSubmit}
                 >
                   Đăng
                 </button>

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import registerSchema from "../../schemas/register";
 import { joiResolver } from "@hookform/resolvers/joi";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [sta, setSta] = useState(true)
@@ -17,6 +18,8 @@ const RegisterForm = () => {
     reset,
     formState: { errors, isValid },
   } = useForm({ resolver: joiResolver(registerSchema) });
+  const navigate = useNavigate()
+
 
   const getLocation = () => {
     if (navigator.permissions) {
@@ -79,6 +82,8 @@ const RegisterForm = () => {
           data
         );
         (response.data.status === 200) && toast.success("Register successfully!") && reset();
+        setTimeout(navigate('/login', 5000))
+        setTimeout(()=>{ window.location.reload();}, 3000)
       } catch (error) {
         console.error("Error registering:", error);
         toast.error(`Register failed! ${error.response.data.message}`, { closeOnClick: true });
@@ -281,11 +286,11 @@ const RegisterForm = () => {
             </a>
           </p>
         </form>
-      </div >
+      </div>
       
       <Footer />
 
-    </div >
+    </div>
   );
 };
 

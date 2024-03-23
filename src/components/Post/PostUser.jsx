@@ -2,7 +2,7 @@ import React from "react";
 
 const PostUser = ({ listPost }) => {
   return (
-    <div className="flex mt-5">
+    <div className="flex mt-[40px]">
       <div className=" w-full">
         {listPost?.map((item, index) => (
           <form key={index} className="bg-[#292929] shadow-md rounded-md p-4 mb-4 border-2  border-green-500">
