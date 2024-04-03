@@ -10,7 +10,7 @@ import Personal from './components/Personal infor/basicinfor';
 import EditProfile from './components/EditProfile/EditProfile';
 import Finding from './components/Finding/Finding';
 import Allpost from './components/Post/Allpost';
-
+import Messenger from './components/Messenger/Messenger';
 function App() {
   return (
     <Router>
@@ -25,6 +25,8 @@ function App() {
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/finding" element={<Finding />} />
         <Route path="/allpost/:groupId" element={<Allpost />} />
+        <Route path="/messenger" element={<Messenger />} />
+        <Route path="/messenger/:id" element={<Messenger />} />
       </Routes>
     </Router>
   );

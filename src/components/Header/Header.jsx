@@ -53,6 +53,16 @@ const Header = () => {
         color="text-white"
         className="p-1 font-normal"
       >
+        <a href="/messenger" className="flex items-center">
+          Messenger
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="text-white"
+        className="p-1 font-normal"
+      >
         <a href="posts/1" className="flex items-center">
           Group
         </a>
