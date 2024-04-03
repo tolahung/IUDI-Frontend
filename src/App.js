@@ -9,7 +9,7 @@ import Posts from './components/Post/Posts';
 import Personal from './components/Personal infor/basicinfor';
 import EditProfile from './components/EditProfile/EditProfile';
 import Finding from './components/Finding/Finding';
-
+import Messenger from './components/Messenger/Messenger';
 function App() {
   return (
     <Router>
@@ -23,6 +23,8 @@ function App() {
         <Route path="/personal" element={<Personal />} />
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/finding" element={<Finding />} />
+        <Route path="/messenger" element={<Messenger />} />
+        <Route path="/messenger/:id" element={<Messenger />} />
       </Routes>
     </Router>
   );
