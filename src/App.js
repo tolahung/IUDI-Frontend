@@ -9,6 +9,7 @@ import Posts from './components/Post/Posts';
 import Personal from './components/Personal infor/basicinfor';
 import EditProfile from './components/EditProfile/EditProfile';
 import Finding from './components/Finding/Finding';
+import Allpost from './components/Post/Allpost';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/personal" element={<Personal />} />
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/finding" element={<Finding />} />
+        <Route path="/allpost/:groupId" element={<Allpost />} />
       </Routes>
     </Router>
   );
