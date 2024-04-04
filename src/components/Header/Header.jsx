@@ -116,7 +116,7 @@ const Header = () => {
 
   window.addEventListener('scroll', changeColor);
   return (
-    <div className=""> 
+    <div className="mt-[-10px]"> 
       <div className="text-white pb-[100px] " >           
       <div
         className="flex items-center justify-between transition ease-in-out delay-150   text-white fixed left-0 right-0 z-10"

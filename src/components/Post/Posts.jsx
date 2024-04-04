@@ -8,6 +8,7 @@ import FormPost from "./FormPost";
 import { useNavigate, useParams } from "react-router-dom";
 import Thumbgroup from "./Thumbgroup";
 import ListImg from "./ListImg";
+import BackToTop from "./BackToTop";
 
 function Posts() {
 
@@ -200,6 +201,7 @@ function Posts() {
           </div>
         </div>
       </div>
+      <BackToTop />
       {/* <Footer /> */}
     </div>
   );

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../Header/Header';
+import BackToTop from './BackToTop';
 
 const Allpost = () => {
     const { groupId } = useParams()
@@ -14,7 +15,7 @@ const Allpost = () => {
             .catch(err => console.log(err))
     }, [])
     return (
-        <div>
+        <div className='mb-[50px]'>
             <Header />
             <div className='flex justify-center my-[50px]'>
                 <p className='text-white font-bold text-3xl'>All Post</p>
@@ -36,6 +37,7 @@ const Allpost = () => {
                 </div>
 
             </div>
+            <BackToTop />
         </div>
     );
 };
